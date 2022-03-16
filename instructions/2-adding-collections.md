@@ -60,3 +60,4 @@ Once this command has completed, you should see the following output:
 
 ```
 
+Next [Step 3](./3-configuring-postgresql.md)

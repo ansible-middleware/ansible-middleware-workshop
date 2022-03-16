@@ -70,3 +70,5 @@ You should see the following output:
     "ping": "pong"
 }
 ```
+
+Next [Step 2](./2-adding-collections.md)
