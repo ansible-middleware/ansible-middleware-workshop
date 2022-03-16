@@ -118,3 +118,4 @@ To quit the postgresql client, enter the following command:
 
 `\q`
 
+Next [Step 4](./4-deploying-jboss-eap.md)

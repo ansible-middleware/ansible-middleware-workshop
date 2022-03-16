@@ -90,4 +90,4 @@ To test the install, open your browser and navigate to the ip address of one of 
 ![JBoss EAP default landing page](../images/jboss-default.png)
 
 
-Next [Step 4](./4-deploying-jboss-eap.md)
+Next [Step 5](./5-configuring-jboss-eap.md)
