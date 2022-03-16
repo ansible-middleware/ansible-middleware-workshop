@@ -68,7 +68,7 @@ In the tasks section add the following under the "Set up for JBoss module" task:
 
 ```
 
-    If you're familiar with JBoss EAP configuration using the cli, you'll recognise these configurations.  JCliff is being used to add a postgresql driver and datasource.
+If you're familiar with JBoss EAP configuration using the cli, you'll recognise these configurations.  JCliff is being used to add a postgresql driver and datasource.
 
-    Re-run the playbook to see the changes.
+Re-run the playbook to see the changes.
 
