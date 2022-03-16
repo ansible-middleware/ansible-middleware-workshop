@@ -1,4 +1,4 @@
-# 1 - Adding the ansible collections.
+# 2 - Adding the ansible collections.
 
 This workshop uses the following collections:
 

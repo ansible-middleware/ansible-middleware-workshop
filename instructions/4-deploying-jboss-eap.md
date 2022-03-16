@@ -1,4 +1,4 @@
-# 1 - Deploying JBoss EAP
+# 4 - Deploying JBoss EAP
 
 Next thing we're going to do is deploy JBoss EAP.  To do this we'll create a jboss playlist by creating a file jboss.yml in the top level folder.
 
@@ -67,7 +67,7 @@ This file includes the wildfly collection and uses the wildfly_install role to i
 
 There are only a few tasks included in this file, the first few tasks install and configure the firewall to allow access on the https and management ports, and then finally the widlfly_systemd task is used to install the JBoss service.
 
-# 2 - Running the playbook
+## Running the playbook
 
 To run the playbook we'll run the following command, you will need your Red Hat network credentials that we created in section 1: 
 
@@ -83,7 +83,7 @@ PLAY RECAP *********************************************************************
 
 ```
 
-# 3 - Testing the installation
+## Testing the installation
 
 To test the install, open your browser and navigate to the ip address of one of the JBoss EAP app servers on port 8080, e.g. 192.168.122.224:8080, hint: the ip addresses are shown in the output of the previous command. You should see something like:
 

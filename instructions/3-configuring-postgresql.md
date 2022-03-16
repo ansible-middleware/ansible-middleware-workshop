@@ -1,4 +1,4 @@
-# 1 - Installing the postgresql role
+# 3 - Installing the postgresql role
 
 First thing we need to do is create a "roles" folder.  To do this, run the following command:
 
@@ -15,9 +15,9 @@ There are two main files we'll look at:
 * defualts/main.yml
 * tasks/main.yml
 
-# 2 - Reviewing the postgresql role
+## - Reviewing the postgresql role
 
-## defaults/main.yml
+### defaults/main.yml
 
 The defaults/main.yml file is the main file that contains the default variables that are used by the postgresql role.  
 
@@ -27,7 +27,7 @@ Included in these variables are the following:
 * packages_list, which is a list of packages to install
 * db variable which contains a list of database users e.g. db.name, db.user, db.password
 
-## tasks/main.yml
+### tasks/main.yml
 
 The tasks/main.yml file contains the tasks that are used to perform the postgresql role.  The tasks are as follows:
 
@@ -54,13 +54,13 @@ The tasks/main.yml file contains the tasks that are used to perform the postgres
 * Inserts a rule to allow the app servers access to the postgresql service on port 5432
 
 
-# 3 - Installing the fastpackages role
+## Installing the fastpackages role
 
 The postgresql role requires the fastpackes role to install the packages required by postgresql.  This role is included in the workshop folder.  We will extract this archive to the roles folder.  To do this, run the following command: 
 
 `unzip workshop/fastpackages.zip -d roles`
 
-# 4 - Create the postgresql playbook
+## Create the postgresql playbook
 
 To use the postgresql role, we need to create a playbook.  We will create a playbook called `postgresql.yml`.  This playbook will contain the tasks that are required to install the postgresql role.  The playbook will be as follows:
 
@@ -75,7 +75,7 @@ To use the postgresql role, we need to create a playbook.  We will create a play
         name: postgresql
 ```
 
-# Run the postgresql playbook
+## Run the postgresql playbook
 
 To test the postgresql playbook, we will run the following command:
 
