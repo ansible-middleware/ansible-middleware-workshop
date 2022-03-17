@@ -20,6 +20,6 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 5. [Configuring JBoss EAP](instructions/5-configuring-jboss-eap.md)
 6. [Deploying applications](instructions/6-deploying-applications.md)
 7. [Deploying JBoss Core Services](instructions/7-deploying-jbcs.md)
-8. [Testing](instructions/7-testing.md)
+8. [Testing](instructions/8-testing.md)
 9. [Conclusion](instructions/9-conclusion.md)
 
