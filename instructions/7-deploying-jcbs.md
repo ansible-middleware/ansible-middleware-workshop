@@ -91,3 +91,5 @@ Once the playbook has completed, you should be able to access the application by
  `https://<load balancer ip address>/addressbook`
 
  ![default apache landing page](../images/addressbook.png)
+
+ Next [Step 8](./8-testing.md)
