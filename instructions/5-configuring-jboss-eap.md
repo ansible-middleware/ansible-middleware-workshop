@@ -110,6 +110,6 @@ ce",
 
 This confirms the postgresql driver is installed.
 
-Next [Step 6](./6-configuring-jboss-eap.md) will be to configure the postgresql datasource.
+Next [Step 6](./6-deploying-applications.md) will deploy the application.
 
 
