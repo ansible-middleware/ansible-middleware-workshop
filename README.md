@@ -18,7 +18,7 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 3. [Configure postgresql](instructions/3-configuring-postgresql.md)
 4. [Deploying JBoss EAP](instructions/4-deploying-jboss-eap.md)
 5. [Configuring JBoss EAP](instructions/5-configuring-jboss-eap.md)
-6. [Deploying applications](instructions/6-applications.md)
+6. [Deploying applications](instructions/6-deploying-applications.md)
 7. [Deploying JBoss Core Services](instructions/7-deploying-jbcs.md)
 8. [Testing](instructions/7-testing.md)
 9. [Conclusion](instructions/9-conclusion.md)
