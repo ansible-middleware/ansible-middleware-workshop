@@ -47,4 +47,4 @@ You should see the following screen:
 
  ![default apache landing page](../images/addressbook.png)
 
-Next [Step 7](./7-deploying-jcbs.md)
+Next [Step 7](./7-deploying-jbcs.md)
