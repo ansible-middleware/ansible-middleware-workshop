@@ -72,3 +72,44 @@ If you're familiar with JBoss EAP configuration using the cli, you'll recognise 
 
 Re-run the playbook to see the changes.
 
+## Testing the JBoss EAP Configuration
+
+To test the configuration we just performed with JCliff we'll first of all ssh into one of the JBoss EAP instances.  To do this, run the following:
+
+`ssh xxx@<ip-address-of-node>`
+
+Once you're logged in, change user to the jboss user with the following command:
+
+`sudo su jboss`
+
+Then run the following commands to use the JBoss cli:
+
+`cd /opt/jboss-eap-7.4/bin`
+
+`./jboss-cli.sh --connect`
+
+`/subsystem=datasources:installed-drivers-list`
+
+The output should show the postgresql driver.  Something like
+
+```
+{
+    "outcome" => "success",
+    "result" => [
+        {
+            "driver-name" => "postgresql",
+            "deployment-name" => undefined,
+            "driver-module-name" => "org.postgresql",
+            "module-slot" => "main",
+            "driver-datasource-class-name" => "",
+            "driver-xa-datasource-class-name" => "org.postgresql.xa.PGXADataSour
+ce",
+....
+
+```
+
+This confirms the postgresql driver is installed.
+
+Next [Step 6](./6-configuring-jboss-eap.md) will be to configure the postgresql datasource.
+
+
