@@ -93,4 +93,5 @@ To test the install, open your browser and navigate to the ip address of one of 
 ![JBoss EAP default landing page](../images/jboss-default.png)
 
 Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
+
 Next [Step 5](./5-configuring-jboss-eap.md)

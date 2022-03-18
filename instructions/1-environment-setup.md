@@ -73,4 +73,6 @@ You should see the following output:
 }
 ```
 
+We've checked our environment, now we can continue with the workshop and add the required ansible collections.
+
 Next [Step 2](./2-adding-collections.md)

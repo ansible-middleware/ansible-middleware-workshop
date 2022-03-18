@@ -62,4 +62,6 @@ Once this command has completed, you should see the following output:
 
 ```
 
+The collections are installed, we'll now proceed to the next step, installing a postgresql database.
+
 Next [Step 3](./3-configuring-postgresql.md)

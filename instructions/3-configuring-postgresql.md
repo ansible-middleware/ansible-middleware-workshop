@@ -120,4 +120,6 @@ To quit the postgresql client, enter the following command:
 
 `\q`
 
+Our postgresql database is now installed and configured, we can now move on to the next step, installing JBoss EAP.
+
 Next [Step 4](./4-deploying-jboss-eap.md)
