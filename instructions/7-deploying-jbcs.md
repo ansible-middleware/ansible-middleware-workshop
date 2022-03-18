@@ -49,6 +49,8 @@ Now that JBoss Core Services is installed, we can configure it to use mod_cluste
       local_action: template src=remote_sockets.j2 dest=./jcliff/rules/remote_sockets.jcliff.yml
 ```
 
+This will confure the remote_sockets rule to point to the ip address of the JBoss Core Server.  We use an ansible template to do this, to allow us to configure dynamically based on the ip address of the JBoss Core Server.
+
 This task will write to a file in the folder jcliff/rules, so lets create that folder with the command:
 
 `mkdir -p jcliff/rules`
@@ -75,6 +77,8 @@ Next, in the existing "fine tuning configuration" task, add the following in the
                 proxies:
                   - proxy1
 ```
+
+This configuration will instruct mod_cluster to use the proxy1 rule that we configured in the previous step.
 
 The last step is to configure the rules file location for modcluster, we do this by adding the following to the "fine tuning configuration" task under the jcliff section at the same level as the wfly_home variable:
 

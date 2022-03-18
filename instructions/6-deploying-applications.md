@@ -1,6 +1,6 @@
 # 6 - Deploying an application
 
-Now that JBoss EAP is deployed and configured, we can deploy our application.  To do this we'll need to provide a pre-built war file.  For the purpose of this workshop we've already prepared one and made it available in Google drive.  
+Now that JBoss EAP is deployed and configured, we can deploy our application.  To do this we'll need to provide a pre-built war file.  For the purpose of this workshop we've already prepared a war file and made it available in Google drive.  This war file will use the postgresql datasource to persist addressbook records.
 
 First thing we'll do is add details of the app to the vars section of the jboss.yml file.  We'll need to provide the following details:
 
@@ -45,6 +45,8 @@ To test the application, open your browser and navigate to the ip address of one
 
 You should see the following screen:
 
- ![default apache landing page](../images/addressbook.png)
+ ![Addressbook application image](../images/addressbook.png)
+
+Now that the application is deployed, let's move on to the next section, deploying the load balancer.
 
 Next [Step 7](./7-deploying-jbcs.md)

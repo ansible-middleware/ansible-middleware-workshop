@@ -1,5 +1,7 @@
 # 3 - Installing the postgresql role
 
+Our workshop uses a postgresql database.  We will use the postgresql role to install and configure the postgresql database.  
+
 First thing we need to do is create a "roles" folder.  To do this, run the following command:
 
 `mkdir roles`

@@ -1,4 +1,5 @@
 # 5 - Configuring JBoss EAP
+The JBoss EAP instances will need to connect to a shared postgresql instance to persist data.  JBoss EAP will need to be configured with the Postgresql driver and datasource.
 
 To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the jdbc_driver.yml tasks.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "configure firewall for Wildfly ports" task:
 
@@ -68,7 +69,9 @@ In the tasks section add the following under the "Set up for JBoss module" task:
 
 ```
 
-If you're familiar with JBoss EAP configuration using the cli, you'll recognise these configurations.  JCliff is being used to add a postgresql driver and datasource.
+If you're familiar with JBoss EAP configuration using the cli, you'll recognise these configurations.  JCliff is being used to add a postgresql driver and datasource.  
+
+In this instance we're passing the correct management port to JCliff, then using JCliff to add a postresql driver and datasource.  We're also using the loop task to iterate over the management ports, in our case we only have one instance per node, so a single management port.
 
 Re-run the playbook to see the changes.
 

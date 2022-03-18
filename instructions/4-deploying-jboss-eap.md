@@ -65,7 +65,10 @@ Have a look at the yaml we just copied, it's relatively straight forward.  First
 
 This file includes the wildfly collection and uses the wildfly_install role to install JBoss EAP. Note: The wildfly_install role will check for the presence of environment variables rhn_username and rhn_password and if they are present it will download and install JBoss EAP instead of Wildfly.
 
-There are only a few tasks included in this file, the first few tasks install and configure the firewall to allow access on the https and management ports, and then finally the widlfly_systemd task is used to install the JBoss service.
+Once JBoss is installed, the tasks perform the following actions:
+
+* Install and configure the firewall to allow access to the ports required by JBoss EAP. The firewall is opened an all ports for http traffic, management traffic, and ajp traffic (used by mod_cluster).
+* Run the widlfly_systemd role to configure the JBoss EAP instance as a systemd service.
 
 ## Running the playbook
 
@@ -85,9 +88,9 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, open your browser and navigate to the ip address of one of the JBoss EAP app servers on port 8080, e.g. 192.168.122.224:8080, hint: the ip addresses are shown in the output of the previous command. You should see something like:
+To test the install, open your browser and navigate to the ip address of one of the JBoss EAP app servers on port 8080, e.g. http://192.168.122.224:8080, hint: the ip addresses are shown in the output of the previous command. You should see something like:
 
 ![JBoss EAP default landing page](../images/jboss-default.png)
 
-
+Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
 Next [Step 5](./5-configuring-jboss-eap.md)

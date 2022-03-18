@@ -7,6 +7,8 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 This workshop requires the provisioning of the following RHPDS environment.  Once this environment is provisioned your will have the following ... TODO
 
 ## Check ansible hosts
+Login to the Ansible Automation controller via ssh.
+
 Open the file `inventory\hosts`, you should see the ip addresses of your RHEL nodes listed as shown below.
 
 ```
