@@ -1,6 +1,6 @@
 # 4 - Deploying JBoss EAP
 
-Next thing we're going to do is deploy JBoss EAP.  To do this we'll create a jboss playlist by creating a file jboss.yml in the top level folder.
+Next thing we're going to do is deploy JBoss EAP.  To do this we'll create a jboss playbook by creating a file jboss.yml in the top level folder.
 
 Copy the contents of the following file into jboss.yml:
 

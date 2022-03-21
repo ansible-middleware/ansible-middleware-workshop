@@ -3,7 +3,7 @@
 
 # Ansible-middleware workshop
 
-Learn how to deploy JBoss EAP, a postgres database and a load balancer using Ansible and the ansible-middleware library.  This workshop will deploy the following components:
+Learn how to deploy JBoss EAP, a PostgreSQL database and a load balancer using Ansible and the ansible-middleware library (maintained at https://ansible-middleware.github.io/).  This workshop will deploy the following components:
 
 * 2 x JBoss EAP instances running a simple addressbook application
 * 1 x Postgres database, shared by the JBoss EAP instances for persistence

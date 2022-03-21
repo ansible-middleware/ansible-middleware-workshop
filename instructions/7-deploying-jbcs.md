@@ -1,8 +1,8 @@
-# 7 - Deploying Jboss Core Services
+# 7 - Deploying JBoss Core Services
 
 Now that the application is deployed, we can access the application by connecting to each individual JBoss EAP instance.  But what we really is need is a load balancer to sit in front of these two nodes, providing a single IP address to access all instance of the application.  JBoss Core Services will provide this funationality for use using mod_cluster.
 
-To deploy JBoss Core Services, we've provided a zip file containing the role required to deploy jbcs.  To deploy this role, run the following command:
+To deploy JBoss Core Services, we've provided a zip file containing the role required to deploy jbcs.  To add this role the the project, run the following command:
 
 `unzip workshop/jbcs.zip -d roles`
 
@@ -55,7 +55,7 @@ This task will write to a file in the folder jcliff/rules, so lets create that f
 
 `mkdir -p jcliff/rules`
 
-We also need to create a temlates folder, and create a file called remote_sockets.j2 in that folder.  Copy the following snippet to the top of the file:
+We also need to create a templates folder, and create a file called remote_sockets.j2 in that folder.  Copy the following snippet to the top of the file:
 
 ```
 { "standard-sockets" => {
@@ -78,9 +78,9 @@ Next, in the existing "fine tuning configuration" task, add the following in the
                   - proxy1
 ```
 
-This configuration will instruct mod_cluster to use the proxy1 rule that we configured in the previous step.
+This configuration will use [JCliff](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/README.html#about) to configure the JBoss instances with mod_cluster using the proxy1 rule that we configured in the previous step.
 
-The last step is to configure the rules file location for modcluster, we do this by adding the following to the "fine tuning configuration" task under the jcliff section at the same level as the wfly_home variable:
+The last step is to configure the rules file location for modcluster, we do this by adding the following to the "fine tuning configuration" task under the JCliff section at the same level as the wfly_home variable:
 
 `rule_file: jcliff/rules`
 

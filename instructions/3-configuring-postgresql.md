@@ -2,7 +2,7 @@
 
 Our workshop uses a postgresql database.  We will use the postgresql role to install and configure the postgresql database.  
 
-First thing we need to do is create a "roles" folder.  To do this, run the following command:
+First thing we need to do is create a "roles" folder.  To do this, run the following command from the root of the workshop folder:
 
 `mkdir roles`
 
@@ -17,7 +17,7 @@ There are two main files we'll look at:
 * defualts/main.yml
 * tasks/main.yml
 
-## - Reviewing the postgresql role
+## Reviewing the postgresql role
 
 ### defaults/main.yml
 

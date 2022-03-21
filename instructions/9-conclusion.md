@@ -19,7 +19,7 @@ This playbook will run the postgresql, jbcs, and jboss playbooks in sequence.  T
 
 Save this file and run the playbook with the following command:
 
-    `ansible-playbook -i ./inventory/hosts demo.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"`
+`ansible-playbook -i ./inventory/hosts demo.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>" `
 
 # Conclusion
 

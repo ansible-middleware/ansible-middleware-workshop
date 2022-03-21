@@ -1,7 +1,7 @@
 # 5 - Configuring JBoss EAP
 The JBoss EAP instances will need to connect to a shared postgresql instance to persist data.  JBoss EAP will need to be configured with the Postgresql driver and datasource.
 
-To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the jdbc_driver.yml tasks.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "configure firewall for Wildfly ports" task:
+To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the jdbc_driver.yml task.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "configure firewall for Wildfly ports" task:
 
 
 ```
@@ -12,7 +12,7 @@ To configure JBoss EAP we're going to download and install postgresql jdbc drive
 
 ```
 
-To use these tasks we need to add the required environment variables to identify and download the jdbc drivers.
+To use these tasks we need to add the required ansibler variables to identify and download the jdbc drivers.
 
 
 ```
@@ -28,7 +28,9 @@ Add the above environment variables to the jboss.yml file to the end of the vars
 
 ## Configuring with Jcliff
 
-Next we'll add in the jcliff collection and configure JBoss EAP to use the Postgresql database.
+We will use [JCliff](https://github.com/bserdar/jcliff) to configure JBoss EAP.  Jcliff configures a running instance of EAP6/JBoss7 using modular configuration files.  The [JCliff ansible collection](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/) provides a wrapper for the JCliff module enabling it to be used in ansible playbooks.
+
+We'll add in the jcliff collection and configure JBoss EAP to use the Postgresql database.
 
 1 - Add the jcliff collection to the jboss.yml file
 

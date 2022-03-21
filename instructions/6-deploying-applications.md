@@ -19,7 +19,7 @@ Next we'll add the following to the tasks section of the jboss.yml file to downl
         dest: "{{ wildfly_install_workdir }}/{{ app.name }}"
 ```
 
-Finally we'll add the following to the tasks section of the jboss.yml file to deploy the application:
+Finally we'll add the following to the end of the tasks section of the jboss.yml file to deploy the application:
 
 ```
     - name: "Deploy webapp"

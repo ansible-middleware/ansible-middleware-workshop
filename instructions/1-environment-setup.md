@@ -6,10 +6,18 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 
 This workshop requires the provisioning of the following RHPDS environment.  Once this environment is provisioned your will have the following ... TODO
 
+## Accessing the repository
+
+If you are using the provided RHPDS environment, the code repository should already be cloned and availalbe in the `/tmp/ansible-middleware-workshop` directory.  If you are using a different environment, you will need to clone the repository yourself.
+
+The code for this workshop is hosted on GitHub.  You can clone the repository by running the following command: 
+
+`git clone https://github.com/deewhyweb/wildfly-cluster-demo.git && cd wildfly-cluster-demo && git checkout stage1`
+
 ## Check ansible hosts
 Login to the Ansible Automation controller via ssh.
 
-Open the file `inventory\hosts`, you should see the ip addresses of your RHEL nodes listed as shown below.
+Open the file `inventory/hosts`, you should see the ip addresses of your RHEL nodes listed as shown below.
 
 ```
 # Placeholder Group

@@ -2,19 +2,18 @@
 
 This workshop uses the following collections:
 
-* middleware_automation.jcliff: This collection is used to perform configuration of the JBoss EAP instance.  In this workshop we will use jcliff to install postgresql drivers, postgresql datasource, and configure mod_cluster.  For the purpose of this workshop we will use the following version: 0.0.21.  For more information see https://ansible-middleware.github.io/ansible_collections_jcliff/latest/
-
-* middleware_automation.wildfly: This collection is used to perform the installation and configuration of the JBoss EAP instance.  For the purpose of this workshop we will use the following version: 0.0.4.  For more information see https://ansible-middleware.github.io/wildfly/latest/
-
-
-* middleware_automation.redhat_csp_download: This collection is used to perform the installation and configuration of Jboss core services, which we will use for load balancing.  For the purpose of this workshop we will use the following version: 1.2.1. For more information see https://ansible-middleware.github.io/redhat-csp-download/latest/
+* [middleware_automation.jcliff](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/): This collection is used to perform configuration of the JBoss EAP instance.  In this workshop we will use jcliff to install postgresql drivers, postgresql datasource, and configure mod_cluster.  For the purpose of this workshop we will use the following version: 0.0.21.  
+* [middleware_automation.wildfly](https://ansible-middleware.github.io/wildfly/latest/): This collection is used to perform the installation and configuration of the JBoss EAP instance.  For the purpose of this workshop we will use the following version: 0.0.4. 
 
 
-* community.postgresql: This collection is used to perform the installation and configuration of postgresql.  For more information see https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+* [middleware_automation.redhat_csp_download](https://ansible-middleware.github.io/redhat-csp-download/latest/): This collection is used to perform the installation and configuration of Jboss core services, which we will use for load balancing.  For the purpose of this workshop we will use the following version: 1.2.1. 
 
-* community.general: This collection is requred by the moocule testing. For more information see https://docs.ansible.com/ansible/latest/collections/community/general/index.html 
 
-To add these collections to your project, copy and paste the following in the file /molecule/default/requirements.yml
+* [community.postgresql](https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html): This collection is used to perform the installation and configuration of postgresql.  
+
+* [community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html ): This collection is requred by the moocule testing. 
+
+To add these collections to your project, copy and paste the following in the file collections/requirements.yml
 
 ```
 ---
@@ -31,7 +30,7 @@ collections:
 
 Save changes to this file, and run the following command to install the collections: 
 
-`ansible-galaxy collection install -r molecule/default/requirements.yml`
+`ansible-galaxy collection install -r ./collections/requirements.yml`
 
 Once this command has completed, you should see the following output:
 
