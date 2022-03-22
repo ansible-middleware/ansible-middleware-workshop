@@ -14,7 +14,7 @@ You should now see a postgresql folder in the roles folder.  We shouldn't need t
 
 There are two main files we'll look at:
 
-* defualts/main.yml
+* defaults/main.yml
 * tasks/main.yml
 
 ## Reviewing the postgresql role
