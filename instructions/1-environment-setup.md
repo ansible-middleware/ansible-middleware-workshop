@@ -17,7 +17,7 @@ Open the git panel of the IDE and click on "Clone Repository" and enter the foll
 
 TODO - Insert git url here - TODO
 
-![VS Code git panel](./images/git.png)
+![VS Code git panel](../images/git.png)
 
 You will be prompted to select the folder to clone the repo to, choose the default folder, "/home/devops"
 
