@@ -1,0 +1,25 @@
+---
+- name: "reload systemd unit"
+  systemd:
+    daemon_reload: yes
+
+- name: "restart postgres"
+  service:
+    name: postgresql
+    no_block: True
+    state: restarted
+
+- block:
+    - name: "wait for postgres port"
+      wait_for:
+        port: 5432
+        delay: 5
+        timeout: 15
+  rescue:
+    - name: "force stop postgresql https://access.redhat.com/solutions/5605181"
+      command: systemctl daemon-reexec
+    - name: "restart postgres"
+      service:
+        name: postgresql
+        state: restarted
+

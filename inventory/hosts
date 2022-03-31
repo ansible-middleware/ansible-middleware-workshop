@@ -3,16 +3,16 @@
 
 # jboss Group
 [jboss]
-192.168.122.64 
-192.168.122.224 
+192.168.122.208 
+192.168.122.122 
 
 # postgres database Group
 [pgsql]
-192.168.122.20
+192.168.122.83
 
 # jcbs Group
 [jbcs]
-192.168.122.247
+192.168.122.85
 
 [demo:children]
 jboss

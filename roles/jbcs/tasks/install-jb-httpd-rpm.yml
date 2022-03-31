@@ -1,0 +1,28 @@
+---
+- name: "Install HTTPd"
+  command:
+    cmd: yum groupinstall -y "{{ httpd.name }}"
+    creates: "/opt/rh/{{ httpd.name }}"
+
+- block:
+    - stat:
+        path: "{{ httpd.home }}/root/etc/httpd/conf.d/ssl.conf"
+      register: ssl_conf
+
+    - name: "Disable HTTPd SSL support"
+      command:
+        cmd: "yum remove -y {{ httpd.name }}-mod_ssl"
+        warn: no
+      when:
+        - ssl_conf is defined
+        - ssl_conf.stat is defined
+        - ssl_conf.stat.exists
+  when:
+    - httpd is defined
+    - httpd.nossl is defined
+
+- name:
+  service:
+    name: "{{ httpd.name }}-httpd"
+    state: started
+    enabled: yes

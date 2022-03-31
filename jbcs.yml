@@ -1,0 +1,12 @@
+---
+- name: Playbook for JBCS Hosts
+  hosts: jbcs
+  become: true
+  collections:
+    - middleware_automation.redhat_csp_download
+  roles:
+    - redhat_csp_download
+  tasks:
+    - name: "JBoss Core Services"
+      include_role:
+        name: jbcs

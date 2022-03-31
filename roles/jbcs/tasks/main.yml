@@ -1,0 +1,34 @@
+---
+- include_tasks: prereqs.yml
+- include_tasks: install-jb-httpd.yml
+- include_tasks: ssl.yml
+
+- set_fact:
+    jbcs_host: "{{ (groups['jbcs'][0] if groups['jbcs'] | length > 0 else ansible_nodename) }}"
+
+- name: "Ensures mod_cluster configuration is deployed"
+  template:
+    src: templates/mod_cluster.conf.j2
+    dest: /opt/jbcs-httpd24-2.4/httpd/conf.d/mod_cluster.conf
+  notify:
+    - 'expire mod_cluster cache and restart'
+- name: install firewalld
+  become: true
+  action: yum name=firewalld state=installed
+- name: Start firewalld
+  become: true
+  service: name=firewalld state=started enabled=yes
+
+- name: configure firewall for JBCS ports
+  become: yes
+  firewalld:
+    port: "{{ port }}"
+    permanent: true
+    state: enabled
+    immediate: yes
+  loop:
+    - "80/tcp"
+    - "6666/tcp"
+    - "443/tcp"  
+  loop_control:
+    loop_var: port

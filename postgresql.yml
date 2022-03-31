@@ -1,0 +1,8 @@
+---
+- name: Playbook for Postgresql Setup
+  hosts: pgsql
+  become: true
+  tasks:
+    - name: pgsql Role
+      include_role:
+        name: postgresql

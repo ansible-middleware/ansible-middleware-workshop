@@ -1,0 +1,18 @@
+---
+pgsql:
+  pgdata: "{{ overrides_pgsql_pgdata | default('/var/lib/pgsql/data') }}"
+  packages_list:
+    - python39
+    - python39-devel
+    - python3-psycopg2
+    - postgresql-server
+  db:
+    - name: "{{ postgres.db_name | default('default_db') }}"
+      user: "{{ postgres.user.name | default('db_user') }}"
+      password: "{{ postgres.user.password | default('db_password') }}"
+    - name: "keycloak"
+      user: "keycloak-user"
+      password: "keycloak-pass"
+    - name: wildfly
+      user: wildfly
+      password: wildfly

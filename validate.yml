@@ -1,0 +1,15 @@
+---
+- assert:
+    that:
+      - item is defined
+
+- wait_for:
+    port: "{{ item }}"
+
+- name: "Checks that Wildfly server is running and accessible on port {{ item }}"
+  get_url:
+    url: "http://localhost:{{ item }}/"
+    dest: '/dev/null'
+  changed_when: False
+
+- include_tasks: app-check.yml

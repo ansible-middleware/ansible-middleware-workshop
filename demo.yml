@@ -1,0 +1,9 @@
+---
+# Postgres playbook
+- import_playbook: postgresql.yml
+
+# JBoss Core Services (Apache HTTPD)
+- import_playbook: jbcs.yml
+
+# Wildfly Playbook
+- import_playbook: jboss.yml

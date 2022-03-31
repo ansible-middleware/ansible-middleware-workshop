@@ -1,0 +1,94 @@
+- name: "Install PostgreSQL and relate packages"
+  include_role:
+    name: fastpackages
+  vars:
+    packages_list: "{{ pgsql.packages_list }}"
+
+- stat:
+    path: "{{ pgsql.pgdata }}/pg_hba.conf"
+  register: pgdata_init
+
+- name: "Init PostgresQL Db"
+  command:
+    cmd: /usr/bin/postgresql-setup initdb
+    creates: /var/lib/pgsql/initdb.log
+  register: datadir_init
+  when:
+    - pgdata_init is defined
+    - pgdata_init.stat is defined
+    - not pgdata_init.stat.exists
+
+- name: Ensures postgresql.service.d/ dir exists
+  file:
+    path: /etc/systemd/system/postgresql.service.d/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install workaround systemd config for https://access.redhat.com/solutions/5605181"
+  template:
+    src: postgresql-unit-stop.conf
+    dest: /etc/systemd/system/postgresql.service.d/stop.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart postgres
+
+- name: "Ensure PostgreSQL accept connection from app servers"
+  template:
+    src: pg_hba.conf
+    dest: /var/lib/pgsql/data/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: 0600
+  notify:
+    - restart postgres
+
+- name: "Ensure PostgreSQL accept remote connection"
+  template:
+    src: postgresql.conf
+    dest: /var/lib/pgsql/data/postgresql.conf
+    owner: postgres
+    group: postgres
+    mode: 0600
+  notify:
+    - restart postgres
+  when:
+    - groups['pgsql'][0] != 'localhost'
+
+- name: "Ensure the PostgreSQL service is running"
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  when: datadir_init is success
+
+- name: "Create database {{ pgsql.db.name }}"
+  community.postgresql.postgresql_db:
+    name: "{{ item.name }}"
+    encoding: UTF-8
+    template: 'template0'
+  with_items: "{{ pgsql.db }}"
+
+- name: "Create user for database"
+  community.postgresql.postgresql_user:
+    db: "{{ item.name }}"
+    name: "{{ item.user }}"
+    password: "{{ item.password }}"
+    priv: ALL
+    state: present
+  with_items: "{{ pgsql.db }}"
+
+- name: install firewalld
+  become: true
+  action: yum name=firewalld state=installed
+
+- name: Start firewalld
+  become: true
+  service: name=firewalld state=started enabled=yes
+
+- name: insert firewalld rule
+  become: true
+  firewalld: port=5432/tcp permanent=true state=enabled immediate=yes

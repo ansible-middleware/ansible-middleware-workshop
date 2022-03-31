@@ -1,0 +1,278 @@
+# {{ ansible_managed }}
+# This is the main Apache HTTP server configuration file.  It contains the
+# configuration directives that give the server its instructions.
+# See <URL:http://httpd.apache.org/docs/2.4/> for detailed information.
+# In particular, see
+# <URL:http://httpd.apache.org/docs/2.4/mod/directives.html>
+# for a discussion of each configuration directive.
+#
+
+ServerTokens OS
+
+ServerRoot "/opt/jbcs-httpd24-2.4/httpd"
+
+PidFile /opt/jbcs-httpd24-2.4/httpd/run/httpd.pid
+
+Timeout 120
+
+KeepAlive Off
+
+MaxKeepAliveRequests 100
+
+KeepAliveTimeout 15
+
+Listen {{ httpd.bind_address }}:{{ httpd.listen_port }}
+
+Include conf.modules.d/*.conf
+
+#ExtendedStatus On
+
+User apache
+Group apache
+
+ServerAdmin Administrator@localhost
+
+ServerName {{ inventory_hostname }}:80
+
+UseCanonicalName Off
+
+DocumentRoot "/opt/jbcs-httpd24-2.4/httpd/www/html"
+
+<Directory />
+    AllowOverride none
+    Require all denied
+</Directory>
+
+<Directory "/opt/jbcs-httpd24-2.4/httpd/www/html">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+DirectoryIndex index.html index.html.var
+
+AccessFileName .htaccess
+
+<Files ~ "^\.ht">
+    Require all denied
+</Files>
+
+TypesConfig "/etc/mime.types"
+
+<IfModule mod_mime_magic.c>
+    MIMEMagicFile conf/magic
+</IfModule>
+
+HostnameLookups Off
+
+<IfModule reqtimeout_module>
+  RequestReadTimeout header=20-40,MinRate=500 body=20,MinRate=500
+</IfModule>
+
+#EnableMMAP off
+
+#EnableSendfile off
+
+
+ErrorLog logs/error_log
+
+LogLevel warn
+
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+#CustomLog logs/access_log common
+#CustomLog logs/referer_log referer
+#CustomLog logs/agent_log agent
+
+CustomLog logs/access_log combined
+
+ServerSignature On
+
+Alias /icons/ "/opt/jbcs-httpd24-2.4/httpd/www/icons/"
+
+<Directory "/opt/jbcs-httpd24-2.4/httpd/www/icons">
+    Options Indexes MultiViews
+    AllowOverride None
+    Require all granted
+</Directory>
+
+<IfModule mod_dav_fs.c>
+    # Location of the WebDAV lock database.
+    DAVLockDB /var/lib/dav/lockdb
+</IfModule>
+
+ScriptAlias /cgi-bin/ "/opt/jbcs-httpd24-2.4/httpd/www/cgi-bin/"
+
+<Directory "/opt/jbcs-httpd24-2.4/httpd/www/cgi-bin">
+    AllowOverride None
+    Options None
+    Require all granted
+</Directory>
+
+
+IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable
+
+AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip
+
+AddIconByType (TXT,/icons/text.gif) text/*
+AddIconByType (IMG,/icons/image2.gif) image/*
+AddIconByType (SND,/icons/sound2.gif) audio/*
+AddIconByType (VID,/icons/movie.gif) video/*
+
+AddIcon /icons/binary.gif .bin .exe
+AddIcon /icons/binhex.gif .hqx
+AddIcon /icons/tar.gif .tar
+AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv
+AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip
+AddIcon /icons/a.gif .ps .ai .eps
+AddIcon /icons/layout.gif .html .shtml .htm .pdf
+AddIcon /icons/text.gif .txt
+AddIcon /icons/c.gif .c
+AddIcon /icons/p.gif .pl .py
+AddIcon /icons/f.gif .for
+AddIcon /icons/dvi.gif .dvi
+AddIcon /icons/uuencoded.gif .uu
+AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl
+AddIcon /icons/tex.gif .tex
+AddIcon /icons/bomb.gif core
+
+AddIcon /icons/back.gif ..
+AddIcon /icons/hand.right.gif README
+AddIcon /icons/folder.gif ^^DIRECTORY^^
+AddIcon /icons/blank.gif ^^BLANKICON^^
+
+DefaultIcon /icons/unknown.gif
+
+#AddDescription "GZIP compressed document" .gz
+#AddDescription "tar archive" .tar
+#AddDescription "GZIP compressed tar archive" .tgz
+
+ReadmeName README.html
+HeaderName HEADER.html
+
+IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
+
+AddLanguage ca .ca
+AddLanguage cs .cz .cs
+AddLanguage da .dk
+AddLanguage de .de
+AddLanguage el .el
+AddLanguage en .en
+AddLanguage eo .eo
+AddLanguage es .es
+AddLanguage et .et
+AddLanguage fr .fr
+AddLanguage he .he
+AddLanguage hr .hr
+AddLanguage it .it
+AddLanguage ja .ja
+AddLanguage ko .ko
+AddLanguage ltz .ltz
+AddLanguage nl .nl
+AddLanguage nn .nn
+AddLanguage no .no
+AddLanguage pl .po
+AddLanguage pt .pt
+AddLanguage pt-BR .pt-br
+AddLanguage ru .ru
+AddLanguage sv .sv
+AddLanguage zh-CN .zh-cn
+AddLanguage zh-TW .zh-tw
+
+LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv zh-CN zh-TW
+
+ForceLanguagePriority Prefer Fallback
+
+AddDefaultCharset UTF-8
+
+#AddType application/x-tar .tgz
+#AddEncoding x-compress .Z
+#AddEncoding x-gzip .gz .tgz
+
+AddType application/x-compress .Z
+AddType application/x-gzip .gz .tgz
+
+#AddHandler cgi-script .cgi
+#AddHandler send-as-is asis
+AddHandler type-map var
+
+AddType text/html .shtml
+AddOutputFilter INCLUDES .shtml
+
+#ErrorDocument 500 "The server made a boo boo."
+#ErrorDocument 404 /missing.html
+#ErrorDocument 404 "/cgi-bin/missing_handler.pl"
+#ErrorDocument 402 http://www.example.com/subscription_info.html
+
+Alias /error/ "/opt/jbcs-httpd24-2.4/httpd/www/error/"
+
+<IfModule mod_negotiation.c>
+<IfModule mod_include.c>
+    <Directory "/opt/jbcs-httpd24-2.4/httpd/www/error">
+        AllowOverride None
+        Options IncludesNoExec
+        AddOutputFilter Includes html
+        AddHandler type-map var
+        Require all granted
+        LanguagePriority en es de fr
+        ForceLanguagePriority Prefer Fallback
+    </Directory>
+
+#    ErrorDocument 400 /error/HTTP_BAD_REQUEST.html.var
+#    ErrorDocument 401 /error/HTTP_UNAUTHORIZED.html.var
+#    ErrorDocument 403 /error/HTTP_FORBIDDEN.html.var
+#    ErrorDocument 404 /error/HTTP_NOT_FOUND.html.var
+#    ErrorDocument 405 /error/HTTP_METHOD_NOT_ALLOWED.html.var
+#    ErrorDocument 408 /error/HTTP_REQUEST_TIME_OUT.html.var
+#    ErrorDocument 410 /error/HTTP_GONE.html.var
+#    ErrorDocument 411 /error/HTTP_LENGTH_REQUIRED.html.var
+#    ErrorDocument 412 /error/HTTP_PRECONDITION_FAILED.html.var
+#    ErrorDocument 413 /error/HTTP_REQUEST_ENTITY_TOO_LARGE.html.var
+#    ErrorDocument 414 /error/HTTP_REQUEST_URI_TOO_LARGE.html.var
+#    ErrorDocument 415 /error/HTTP_UNSUPPORTED_MEDIA_TYPE.html.var
+#    ErrorDocument 500 /error/HTTP_INTERNAL_SERVER_ERROR.html.var
+#    ErrorDocument 501 /error/HTTP_NOT_IMPLEMENTED.html.var
+#    ErrorDocument 502 /error/HTTP_BAD_GATEWAY.html.var
+#    ErrorDocument 503 /error/HTTP_SERVICE_UNAVAILABLE.html.var
+#    ErrorDocument 506 /error/HTTP_VARIANT_ALSO_VARIES.html.var
+
+</IfModule>
+</IfModule>
+
+BrowserMatch "Mozilla/2" nokeepalive
+BrowserMatch ".*MSIE [2-5]\..*" nokeepalive downgrade-1.0 force-response-1.0
+BrowserMatch "RealPlayer 4\.0" force-response-1.0
+BrowserMatch "Java/1\.0" force-response-1.0
+BrowserMatch "JDK/1\.0" force-response-1.0
+
+BrowserMatch "Microsoft Data Access Internet Publishing Provider" redirect-carefully
+BrowserMatch "MS FrontPage" redirect-carefully
+BrowserMatch "^WebDrive" redirect-carefully
+BrowserMatch "^WebDAVFS/1.[0123]" redirect-carefully
+BrowserMatch "^gnome-vfs/1.0" redirect-carefully
+BrowserMatch "^XML Spy" redirect-carefully
+BrowserMatch "^Dreamweaver-WebDAV-SCM1" redirect-carefully
+
+#<Location /server-status>
+#    SetHandler server-status
+#    Require host example.org
+#</Location>
+
+#<Location /server-info>
+#    SetHandler server-info
+#    Require host example.org
+#</Location>
+
+#NameVirtualHost *:80
+#<VirtualHost *:80>
+#    ServerAdmin webmaster@dummy-host.example.com
+#    DocumentRoot var/www/docs/dummy-host.example.com
+#    ServerName dummy-host.example.com
+#    ErrorLog logs/dummy-host.example.com-error_log
+#    CustomLog logs/dummy-host.example.com-access_log common
+#</VirtualHost>
+
+IncludeOptional conf.d/*.conf

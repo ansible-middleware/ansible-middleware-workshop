@@ -1,0 +1,20 @@
+---
+- set_fact:
+    update_cache: true
+
+- block:
+  - set_fact:
+      packages_to_install: ""
+
+  - name: "Include"
+    include_tasks: tasks/build-packages-list-to-install.yml
+    loop: "{{ packages_list }}"
+    loop_control:
+      loop_var: package_name
+
+  - name: "Test if any packages are left to install: {{ packages_to_install }}"
+    become: yes
+    yum:
+      name: "{{ packages_to_install }}"
+      state: latest
+    when: packages_to_install != ""

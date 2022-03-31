@@ -1,0 +1,10 @@
+---
+collections:
+  - name: middleware_automation.jcliff
+    version: ">=0.0.21"
+  - name: middleware_automation.wildfly
+    version: "==0.0.4"
+  - name: community.general
+  - name: community.postgresql
+  - name: middleware_automation.redhat_csp_download
+    version: ">=1.2.1"

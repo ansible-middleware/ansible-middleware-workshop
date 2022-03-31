@@ -1,0 +1,68 @@
+# {{ ansible_managed }}
+# This is the Apache server configuration file providing SSL support.
+# It contains the configuration directives to instruct the server how to
+# serve pages over an https connection. For detailing information about these
+# directives see <URL:http://httpd.apache.org/docs/2.4/mod/mod_ssl.html>
+#
+
+Listen 443
+
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl
+
+SSLPassPhraseDialog exec:/opt/jbcs-httpd24-2.4/httpd/sbin/httpd-ssl-pass-dialog
+
+SSLSessionCache         shmcb:/opt/jbcs-httpd24-2.4/httpd/run/sslcache(512000)
+SSLSessionCacheTimeout  300
+
+Mutex default
+
+SSLRandomSeed startup file:/dev/urandom  256
+SSLRandomSeed connect builtin
+
+SSLCryptoDevice builtin
+
+<VirtualHost _default_:443>
+
+ErrorLog logs/ssl_error_log
+TransferLog logs/ssl_access_log
+LogLevel warn
+
+SSLEngine on
+SSLProtocol all -SSLv2
+SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
+
+#SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5
+#SSLHonorCipherOrder on
+
+SSLCertificateFile /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/certs/localhost.crt
+SSLCertificateKeyFile /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/private/localhost.key
+#SSLCertificateChainFile /etc/pki/tls/certs/server-chain.crt
+#SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
+
+#SSLVerifyClient require
+#SSLVerifyDepth  10
+
+#SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+<Files ~ "\.(cgi|shtml|phtml|php3?)$">
+    SSLOptions +StdEnvVars
+</Files>
+<Directory "/opt/jbcs-httpd24-2.4/httpd/www/cgi-bin">
+    SSLOptions +StdEnvVars
+</Directory>
+
+BrowserMatch "MSIE [2-5]" \
+         nokeepalive ssl-unclean-shutdown \
+         downgrade-1.0 force-response-1.0
+
+
+CustomLog logs/ssl_request_log \
+          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+
+
+    <Location /mcm>
+      SetHandler mod_cluster-manager
+      Require all granted
+   </Location>
+
+</VirtualHost>

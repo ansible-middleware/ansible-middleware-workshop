@@ -1,0 +1,20 @@
+---
+- assert:
+    that:
+      - item is defined
+    quiet: true
+
+- set_fact:
+    result_file: "/tmp/app-check-{{ item }}.txt"
+
+- get_url:
+    url: "http://localhost:{{ item }}/addressbook/"
+    dest: "{{ result_file }}"
+  changed_when: False
+
+- slurp:
+    src: "{{ result_file }}"
+  register: appcheck_res
+
+- debug:
+    msg: "{{ appcheck_res['content'] | b64decode }}"
