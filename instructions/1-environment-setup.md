@@ -15,7 +15,7 @@ To start the workshop, open the url of your bastion server in a browser. You wil
 
 Open the git panel of the IDE and click on "Clone Repository" and enter the following url:
 
-TODO - Insert git url here - TODO
+https://github.com/ansible-middleware/ansible-middleware-workshop.git
 
 ![VS Code git panel](../images/git.png)
 
