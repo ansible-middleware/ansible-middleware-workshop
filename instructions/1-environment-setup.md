@@ -32,7 +32,7 @@ From the terminal enter the follwing command to copy over the pre-prepared ansib
 ``` cp /etc/ansible/hosts ./inventory ```
 
 
-Open the file `inventory/hosts`, you should see the ip addresses of your RHEL nodes listed as shown below.
+Open the file `inventory/hosts`, you should see the hostnames of your nodes similar to those shown below.
 
 ```
 # Placeholder Group
@@ -40,16 +40,16 @@ Open the file `inventory/hosts`, you should see the ip addresses of your RHEL no
 
 # jboss Group
 [jboss]
-192.168.122.64 
-192.168.122.224 
+app1.guid.internal 
+app2.guid.internal 
 
 # postgres database Group
 [pgsql]
-192.168.122.20
+appdb1.guid.internal
 
 # jcbs Group
 [jbcs]
-192.168.122.247
+frontend1.guid.internal
 
 [demo:children]
 jboss
