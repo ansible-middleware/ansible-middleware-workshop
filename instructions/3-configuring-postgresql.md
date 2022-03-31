@@ -85,7 +85,7 @@ To test the postgresql playbook, we will run the following command:
 
 Once this command has completed, you should be able to connect to and test the postgresql service.  To do this, connect to the postgresql server using ssh.  Open inventory/hosts and find the ip address listed under the pgsql group.  Connect to this host with the command 
 
-`ssh <ip address>`
+`ssh appdb1.guid01.internal`
 
 Once connected to the postgresql server, you should be able to connect to the postgresql service using the following command: 
 

@@ -1,0 +1,20 @@
+# Placeholder Group
+[demo]
+
+# jboss Group
+[jboss]
+192.168.122.64 
+192.168.122.224 
+
+# postgres database Group
+[pgsql]
+192.168.122.20
+
+# jcbs Group
+[jbcs]
+192.168.122.247
+
+[demo:children]
+jboss
+pgsql
+jbcs

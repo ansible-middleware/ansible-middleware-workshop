@@ -1,0 +1,7 @@
+---
+postgres:
+  db_name: wildfly
+  jndi_ds: AddressbookDS
+  user:
+    name: jboss
+    password: jboss
