@@ -13,22 +13,26 @@ This workshop requires the provisioning of the following RHPDS environment.  Onc
 
 To start the workshop, open the url of your bastion server in a browser. You will be prompted to login.  The default password is "changme".  Once you login to the IDE you will be able to clone the workshop repository.
 
+Open the git panel of the IDE and click on "Clone Repository" and enter the following url:
 
-## Accessing the repository
+https://github.com/ansible-middleware/ansible-middleware-workshop.git
 
-If you are using the provided RHPDS environment, the code repository should already be cloned and availalbe in the `/tmp/ansible-middleware-workshop` directory.  If you are using a different environment, you will need to clone the repository yourself.
+![VS Code git panel](../images/git.png)
 
-The code for this workshop is hosted on GitHub.  You can clone the repository by running the following command: 
+You will be prompted to select the folder to clone the repo to, choose the default folder, "/home/devops"
 
-`git clone https://github.com/deewhyweb/wildfly-cluster-demo.git && cd wildfly-cluster-demo && git checkout stage1`
+You will then be prompted to open the folder in VS Code.
 
 ## Check ansible hosts
-Login to the Ansible Automation controller via ssh.
 
-cp /etc/ansible/hosts ./inventory
+From the VS Code IDE, open a new terminal by clicking on the "Terminal" menu.
+
+From the terminal enter the follwing command to copy over the pre-prepared ansible hosts file:
+
+``` cp /etc/ansible/hosts ./inventory ```
 
 
-Open the file `inventory/hosts`, you should see the ip addresses of your RHEL nodes listed as shown below.
+Open the file `inventory/hosts`, you should see the hostnames of your nodes similar to those shown below.
 
 ```
 # Placeholder Group
@@ -36,16 +40,16 @@ Open the file `inventory/hosts`, you should see the ip addresses of your RHEL no
 
 # jboss Group
 [jboss]
-192.168.122.64 
-192.168.122.224 
+app1.guid.internal 
+app2.guid.internal 
 
 # postgres database Group
 [pgsql]
-192.168.122.20
+appdb1.guid.internal
 
 # jcbs Group
 [jbcs]
-192.168.122.247
+frontend1.guid.internal
 
 [demo:children]
 jboss
@@ -57,7 +61,7 @@ jbcs
 ## Test ansible hosts
 Once we have checked the hosts file we can test the ansible hosts file by running the following command.
 
-`ansible -i inventory/hosts demo -m ping`
+```ansible -i inventory/hosts demo -m ping```
 
 You should see the following output:
 
