@@ -88,9 +88,14 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, open your browser and navigate to the ip address of one of the JBoss EAP app servers on port 8080, e.g. http://192.168.122.224:8080, hint: the ip addresses are shown in the output of the previous command. You should see something like:
+To test the install, use curl to access the JBoss EAP instance.  From the terminal run the following command:
 
-![JBoss EAP default landing page](../images/jboss-default.png)
+```
+curl http://app1.guid01.internal:8080
+
+```
+
+You should see a html response showing the default JBoss landing page.
 
 Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
 
