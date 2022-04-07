@@ -88,12 +88,9 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, use curl to access the JBoss EAP instance.  From the terminal run the following command:
+To test the install, click the "Browser Preview" tab and enter the url http://app1.guid01.internal:8080/ in the address bar.  You should see the following page:
 
-```
-curl http://app1.guid01.internal:8080
-
-```
+![Default JBoss landing page](../images/jboss-default.png)
 
 You should see a html response showing the default JBoss landing page.
 

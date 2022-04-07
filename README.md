@@ -1,5 +1,5 @@
 
-<h1 align="center"><a href="instructions/1-environment-setup.md">Start here!</a></h1>
+<h1 align="center"><a href="https://github.com/ansible-middleware/ansible-middleware-workshop/blob/main/instructions/1-environment-setup.md">Start here!</a></h1>
 
 # Ansible-middleware workshop
 

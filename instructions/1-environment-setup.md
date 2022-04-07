@@ -25,7 +25,7 @@ You will then be prompted to open the folder in VS Code.
 
 ## Check ansible hosts
 
-From the VS Code IDE, open a new terminal by clicking on the "Terminal" menu.
+From the VS Code IDE, open a new terminal by clicking on the "Terminal" menu and selecting "New Terminal".
 
 From the terminal enter the follwing command to copy over the pre-prepared ansible hosts file:
 

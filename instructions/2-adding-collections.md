@@ -50,7 +50,7 @@ To check the status of the collections, run the following command:
 
 Once this command has completed, you should see the following output:
 ```
-/home/xxx/.ansible/collections/ansible_collections/
+/home/devops/.ansible/collections/ansible_collections/
 ├── community
 │   ├── general
 │   └── postgresql

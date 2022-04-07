@@ -29,9 +29,9 @@ Save this file, and test the playbook by running the following command:
 
 # Testing the JBCS installation
 
-To test the JBoss Core Services are installed correctly, use your browser and navigate to the ip address of your JBoss Core Server.
+To test the JBoss Core Services are installed correctly, use your browser and navigate to the external hostname of your JBoss Core Server.
 
-e.g. `https://<ip address>`
+e.g. `https://frontend1.guid01.domainname.com`
 
 You should see the default apache landing page.
 
@@ -94,6 +94,6 @@ Once the playbook has completed, you should be able to access the application by
 
  `https://<load balancer ip address>/addressbook`
 
- ![default apache landing page](../images/addressbook.png)
+ ![address book](../images/addressbook-public.png)
 
  Next [Step 8](./8-testing.md)

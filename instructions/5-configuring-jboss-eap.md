@@ -1,7 +1,7 @@
 # 5 - Configuring JBoss EAP
 The JBoss EAP instances will need to connect to a shared postgresql instance to persist data.  JBoss EAP will need to be configured with the Postgresql driver and datasource.
 
-To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the jdbc_driver.yml task.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "configure firewall for Wildfly ports" task:
+To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the jdbc_driver.yml task.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "Set up for JBoss instance" task:
 
 
 ```
@@ -12,7 +12,7 @@ To configure JBoss EAP we're going to download and install postgresql jdbc drive
 
 ```
 
-To use these tasks we need to add the required ansibler variables to identify and download the jdbc drivers.
+To use these tasks we need to add the required ansible variables to identify and download the jdbc drivers.
 
 
 ```

@@ -39,15 +39,9 @@ Once the playbook is complete, you should be able to access the application.
 
 # Testing the application
 
-To test the install, use curl to access the JBoss EAP instance.  From the terminal run the following command:
+To test the install, use the Browser Preview and open the url http://app1.guid01.internal:8080/addressbook you should see the addressbook application.
 
-```
-curl http://app1.guid01.internal:8080/addressbook
-```
-
-```
-
-You should see a html response showing addressbook app landing page.
+![Addressbook page](../images/addressbook.png)
 
 Now that the application is deployed, let's move on to the next section, deploying the load balancer.
 
