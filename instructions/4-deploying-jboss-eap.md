@@ -32,8 +32,10 @@ Copy the contents of the following file into jboss.yml:
       - 8009
     jboss_eap_rhn_id: "99481"
   collections:
+    - middleware_automation.redhat_csp_download
     - middleware_automation.wildfly
   roles:
+    - redhat_csp_download
     - wildfly_install
     
   tasks:
@@ -88,7 +90,7 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, click the "Browser Preview" tab and enter the url http://app1.guid01.internal:8080/ in the address bar.  You should see the following page:
+To test the install, click the "Browser Preview" tab and enter the url http://app1.guid.internal:8080/ in the address bar.  You should see the following page:
 
 ![Default JBoss landing page](../images/jboss-default.png)
 

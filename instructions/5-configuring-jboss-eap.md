@@ -24,11 +24,12 @@ To use these tasks we need to add the required ansible variables to identify and
     jdbc_driver_module_name: 'org.postgresql'
 ```
 
-Add the above environment variables to the jboss.yml file to the end of the vars section
+Add the above environment variables to the jboss.yml file to the end of the vars section, and rerun the playbook to deploy the JDBC driver.
+
 
 ## Configuring with Jcliff
 
-We will use [JCliff](https://github.com/bserdar/jcliff) to configure JBoss EAP.  Jcliff configures a running instance of EAP6/JBoss7 using modular configuration files.  The [JCliff ansible collection](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/) provides a wrapper for the JCliff module enabling it to be used in ansible playbooks.
+We will use [JCliff](https://github.com/bserdar/jcliff) to configure JBoss EAP.  Jcliff configures a running instance of EAP6/JBoss7 using modular configuration files.  The [JCliff Ansible collection](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/) provides a wrapper for the JCliff module enabling it to be used in ansible playbooks.
 
 We'll add in the jcliff collection and configure JBoss EAP to use the Postgresql database.
 
@@ -113,7 +114,7 @@ ce",
 
 ```
 
-This confirms the postgresql driver is installed.
+This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
 
 Next [Step 6](./6-deploying-applications.md) will deploy the application.
 

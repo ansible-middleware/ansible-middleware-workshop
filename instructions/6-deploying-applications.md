@@ -39,7 +39,7 @@ Once the playbook is complete, you should be able to access the application.
 
 # Testing the application
 
-To test the install, use the Browser Preview and open the url http://app1.guid01.internal:8080/addressbook you should see the addressbook application.
+To test the install, use the Browser Preview and open the url http://app1.guid.internal:8080/addressbook you should see the addressbook application.
 
 ![Addressbook page](../images/addressbook.png)
 
