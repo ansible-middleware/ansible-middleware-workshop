@@ -1,6 +1,6 @@
 # 6 - Deploying an application
 
-Now that JBoss EAP is deployed and configured, we can deploy our application.  To do this we'll need to provide a pre-built war file.  For the purpose of this workshop we've already prepared a war file and made it available in Google drive.  This war file will use the postgresql datasource to persist addressbook records.
+Now that JBoss EAP is deployed and configured, we can deploy our application.  To do this we'll need to provide a pre-built war file.  For the purpose of this workshop we've already prepared a war file and made it available in S3.  This war file will use the postgresql datasource to persist addressbook records.
 
 First thing we'll do is add details of the app to the vars section of the jboss.yml file.  We'll need to provide the following details:
 
