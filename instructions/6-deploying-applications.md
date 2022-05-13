@@ -7,7 +7,7 @@ First thing we'll do is add details of the app to the vars section of the jboss.
 ```
     app:
       name: 'addressbook.war'
-      url: 'https://drive.google.com/uc?export=download&id=1HOfRNHFxuuQuCEtMFt1jhvlclIpz888D'
+      url: 'https://gpte-public.s3.amazonaws.com/addressbook.war'
 ```
 
 Next we'll add the following to the tasks section of the jboss.yml file to download the application:
