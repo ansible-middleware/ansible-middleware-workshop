@@ -90,7 +90,7 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, click the "Browser Preview" tab and enter the url http://app1.guid.internal:8080/ in the address bar.  You should see the following page:
+To test the install, click the "Browser Preview" tab and enter the url http://app1.xxxxx.internal:8080/ in the address bar (replace xxxxx with the guid of your workshop, you can find this from the previous ansible command).  You should see the following page:
 
 ![Default JBoss landing page](../images/jboss-default.png)
 

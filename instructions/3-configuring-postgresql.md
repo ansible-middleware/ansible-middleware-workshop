@@ -83,9 +83,9 @@ To test the postgresql playbook, we will run the following command:
 
 `ansible-playbook -i ./inventory/hosts postgresql.yml`
 
-Once this command has completed, you should be able to connect to and test the postgresql service.  To do this, connect to the postgresql server using ssh.  Open inventory/hosts and find the ip address listed under the pgsql group.  Connect to this host with the command 
+Once this command has completed, you should be able to connect to and test the postgresql service.  To do this, connect to the postgresql server using ssh.  Open inventory/hosts and find the ip address listed under the pgsql group.  Connect to this host with the command (replace xxxxx with the guid of your workshop, you can find this from the previous ansible command)
 
-`ssh appdb1.guid.internal`
+`ssh appdb1.xxxxx.internal`
 
 Once connected to the postgresql server, you should be able to connect to the postgresql service using the following command: 
 
@@ -119,6 +119,10 @@ This shows that postgresql is installed and configured correctly with the correc
 To quit the postgresql client, enter the following command:
 
 `\q`
+
+To return to the bastion host enter
+
+`exit`
 
 Our postgresql database is now installed and configured, we can now move on to the next step, installing JBoss EAP.
 

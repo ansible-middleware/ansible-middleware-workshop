@@ -39,7 +39,7 @@ Once the playbook is complete, you should be able to access the application.
 
 # Testing the application
 
-To test the install, use the Browser Preview and open the url http://app1.guid.internal:8080/addressbook you should see the addressbook application.
+To test the install, use the Browser Preview and open the url http://app1.xxxxx.internal:8080/addressbook (replace xxxxx with the guid of your workshop, you can find this from the previous ansible command) you should see the addressbook application.
 
 ![Addressbook page](../images/addressbook.png)
 

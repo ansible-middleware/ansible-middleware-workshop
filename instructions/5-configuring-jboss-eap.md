@@ -114,6 +114,10 @@ ce",
 
 ```
 
+To return to the bastion node, run the following command three times:
+
+`exit`
+
 This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
 
 Next [Step 6](./6-deploying-applications.md) will deploy the application.

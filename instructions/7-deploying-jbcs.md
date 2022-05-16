@@ -31,7 +31,9 @@ Save this file, and test the playbook by running the following command:
 
 To test the JBoss Core Services are installed correctly, use your browser and navigate to the external hostname of your JBoss Core Server.
 
-e.g. `https://frontend1.guid01.domainname.com`
+e.g. `https://frontend1.xxxxx.domainname.com`
+
+The url of the frontend server can be found in the email received from the RHPDS provisioning.
 
 You should see the default apache landing page.
 
@@ -55,7 +57,14 @@ This task will write to a file in the folder jcliff/rules, so lets create that f
 
 `mkdir -p jcliff/rules`
 
-We also need to create a templates folder, and create a file called remote_sockets.j2 in that folder.  Copy the following snippet to the top of the file:
+We also need to create a templates folder, and create a file called remote_sockets.j2 in that folder.  
+
+`mkdir templates`
+
+`touch templates/remote_sockets.j2`
+
+
+Copy the following snippet to the top of the file:
 
 ```
 { "standard-sockets" => {

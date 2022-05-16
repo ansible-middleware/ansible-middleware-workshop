@@ -4,12 +4,32 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 
 ## Set up the environment
 
-This workshop requires the provisioning of the following RHPDS environment.  Once this environment is provisioned your will have the following:
+This workshop requires the provisioning of the following RHPDS environment.  
+
+Management Automation Workshops Demos -> Ansible Automation Workshop
+
+Once this environment is provisioned your will have the following:
 
 * A bastion node, serving a VS Code Server IDE, which can be used to run the workshop
 * 2 x App Servers, which will host JBoss EAP
 * 1 x db server, which will host Postgresql
 * 1 x frontend server, which will host the load balancer
+
+You will receive an email containing the following information:
+
+```
+To access frontend via browser:
+https://frontend1.xxxxx.sandbox894.opentlc.com
+To access vs code server via browser:
+https://bastion.xxxxxx.sandbox894.opentlc.com
+Enter default password changme
+
+To access bastion via SSH:
+ssh devops@bastion.xxxxxx.sandbox894.opentlc.com
+Enter ssh password when prompted: xxxxxxxx
+
+
+```
 
 To start the workshop, open the url of your bastion server in a browser. You will be prompted to login.  The default password is "changme".  Once you login to the IDE you will be able to clone the workshop repository.
 
