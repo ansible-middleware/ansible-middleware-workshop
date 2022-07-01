@@ -10,7 +10,7 @@ Copy the contents of the following file into jboss.yml:
   hosts: jboss
   become: yes
   vars:
-    wildfly_install_workdir: '/opt'
+    wildfly_install_workdir: '/opt/'
     install_name: "{{ override_install_name | default('jboss') }}"
     jboss_version: "7.4"
     wildfly_version: "{{ jboss_version }}"

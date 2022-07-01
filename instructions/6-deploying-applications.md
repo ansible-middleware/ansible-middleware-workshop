@@ -24,7 +24,7 @@ Finally we'll add the following to the end of the tasks section of the jboss.yml
 ```
     - name: "Deploy webapp"
       include_role:
-        name: jboss_eap
+        name: wildfly_utils
         tasks_from: jboss_cli.yml
       vars:
         jboss_home: "{{ wildfly_home }}"

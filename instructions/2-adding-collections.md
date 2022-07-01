@@ -19,13 +19,13 @@ To add these collections to your project, copy and paste the following in the fi
 ---
 collections:
   - name: middleware_automation.jcliff
-    version: ">=0.0.21"
+    version: ">=0.0.23"
   - name: middleware_automation.wildfly
-    version: "==0.0.4"
+    version: "==1.0.5"
   - name: community.general
   - name: community.postgresql
   - name: middleware_automation.redhat_csp_download
-    version: ">=1.2.1"
+    version: ">=1.2.2"
 ```
 
 Save changes to this file, and run the following command to install the collections: 
