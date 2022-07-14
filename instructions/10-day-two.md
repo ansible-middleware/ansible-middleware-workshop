@@ -76,7 +76,6 @@ Now that the patch file is downloaded we will create another playbook to apply t
    install_name: "{{ override_install_name | default('jboss') }}"
    jboss_version: "7.4"
    wildfly_version: "{{ jboss_version }}"
-   wildfly_archive_filename: "{{ install_name }}-eap-{{ wildfly_version }}.zip"
    wildfly_user: "{{ install_name }}"
    wildfly_group: "{{ wildfly_user }}"
    wildfly_home: "{{ wildfly_install_workdir }}/{{ install_name }}-eap-{{ wildfly_version }}"
