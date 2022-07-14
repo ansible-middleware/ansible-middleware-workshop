@@ -32,7 +32,7 @@ You'll see from here the Product is "JBoss EAP 7.4.0.GA" and the Release is "15.
 
 Enter "exit" three times to return to the bastion host.
 
-To do this, we're going to do is create a playbook to download the latest patch to our bastion host.  
+To start the patching process, we're going to create a playbook to download the latest patch to our bastion host.  
 
 Create a file called patch-download.yml and paste the following:
 
@@ -62,9 +62,7 @@ As we did before, replace the rhn login and password with your own credentials a
 
 `ansible-playbook -i ./inventory/hosts patch-download.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password> patch_version=7.4.5 patch_id=104511"`
 
-Once this completes you should see the patch downloaded to /opt/jboss-eap-7.4.5-patch.zip
-
-```sudo ln /opt```
+Once this completes you should see the patch downloaded to the local folder; jboss-eap-7.4.5-patch.zip
 
 Now that the patch file is downloaded we will create another playbook to apply the patch.  Create a new file patch-apply.yml and paste the following.
 
