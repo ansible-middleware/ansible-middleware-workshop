@@ -79,27 +79,18 @@ Now that the patch file is downloaded we will create another playbook to apply t
    wildfly_archive_filename: "{{ install_name }}-eap-{{ wildfly_version }}.zip"
    wildfly_user: "{{ install_name }}"
    wildfly_group: "{{ wildfly_user }}"
-   wildfly_config_base: standalone-ha.xml
    wildfly_home: "{{ wildfly_install_workdir }}/{{ install_name }}-eap-{{ wildfly_version }}"
    wildfly_basedir_prefix: "/opt/{{ install_name }}"
    wildfly_config_name: "{{ install_name }}"
    wildfly_port_range_offset: 0
    wildfly_instance_name: "{{ inventory_hostname }}"
-   service_systemd_env_file: "/etc/{{ install_name }}.conf"
-   service_systemd_conf_file: "/usr/lib/systemd/system/{{ wildfly_instance_name }}.service"
-   path_to_patch: '/opt/'
-   patches_repository: '/opt'
    wildfly_jboss_eap_apply_cp: True
    wildfly_jboss_eap_enable: True
    wildfly_offline_install: True
-   instance_http_ports:
-     - 8080
    instance_management_ports:
      - 9990
-   instance_ajp_port:
-     - 8009
    rhn_cp_id: "104511"
-   rhn_cp_v: "7.4.5"
+   rhn_cp_v: "7.4.5
   collections:
    - middleware_automation.wildfly
   roles:
