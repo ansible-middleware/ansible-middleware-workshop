@@ -65,5 +65,5 @@ The Ansible playbook should output the http response from the addressbook applic
 
 Now that we have our test in place, all that's left is to combine these playbooks into a single playbook.
 
-Next [Step 8](./9-conclusion.md)
+Next [Step 9](./9-conclusion.md)
 
