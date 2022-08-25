@@ -88,8 +88,8 @@ Now that the patch file is downloaded we will create another playbook to apply t
    wildfly_offline_install: True
    instance_management_ports:
      - 9990
-   rhn_cp_id: "104511"
-   rhn_cp_v: "7.4.5
+   rhn_cp_id: "{{ patch_id }}"
+   rhn_cp_v: "{{ patch_version }}"
   collections:
    - middleware_automation.wildfly
   roles:
@@ -99,7 +99,7 @@ Now that the patch file is downloaded we will create another playbook to apply t
 Run this playbook with the following command 
 
 ```
-`ansible-playbook -i ./inventory/hosts patch-apply.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"`
+`ansible-playbook -i ./inventory/hosts patch-apply.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>" patch_version=7.4.5 patch_id=104511"`
 ```
 
 Once this completes, check the version of your JBoss EAP instances. To do this we will ssh into one of our jboss nodes (e.g. ssh app2.xxxxx.internal) and then run the following commands.
@@ -129,5 +129,9 @@ Note that the Product is now "JBoss EAP 7.4.5.GA" and Release is "15.0.13.Final-
 
 We can now be satisfied that the cummulative patch has been successfully deployed to the JBoss EAP servers.  
 
-Cummulative patching is only one type of day 2 operation often performed on JBoss EAP.  Ansible-middleware provides tasks to deploy these patches with minimal effort.  Ansible is also an ideal platform to automate any JBoss EAP day 2 operation.
+If we run this playbook a second time, no changes are made which demonstates Ansible's idempotenty.  
+
+This is a very simple example of performing day 2 operations with Ansible, there are many other ways Ansible can be leveraged for these tasks.  For example, we could configure Ansible to take a backup of the current deployment prior to upgrade, and then in the case of failure, restore the system to it's previous working state.
+
+Next [Step 11](./11-conclusion.md)
 
