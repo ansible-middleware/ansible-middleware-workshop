@@ -27,13 +27,85 @@ Save this file, and test the playbook by running the following command:
 
 `ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"`
 
+# Install valid ssl cert
+
+Before we test our JBCS installation we need to install a valid SSL certificate.  To do this we'll use Let's Encrypt via certbot.
+
+Create a file called ssl.yml and past the following
+
+```
+---
+
+- name: Request Let's Encrypt Static Certificates
+  hosts: jbcs
+  become: true
+  gather_facts: False
+  tasks:
+
+  - name: Install on node RHEL 8
+    block:
+      - name: Stop jbcs
+        ansible.builtin.command: /opt/jbcs-httpd24-2.4/httpd/sbin/apachectl stop
+      - name: Enable EPEL
+        dnf:
+          name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm"
+          state: present
+          disable_gpg_check: true
+
+      - name: install nginx/certbot
+        yum:
+          name:
+            - certbot
+            - python3-certbot-apache
+          state: present
+
+
+  - name: Generate certbot
+    command: >-
+      certbot certonly --standalone
+      -m dummy@redhat.com
+      --agree-tos
+      -d {{ frontend_hostname }} -n
+
+
+  - name: Remove the Apache package
+    ansible.builtin.yum:
+      name: httpd
+      state: absent
+
+  - name: Copy letsecrypt key
+    copy:
+      src: "/etc/letsencrypt/live/{{ frontend_hostname }}/cert.pem"
+      dest: /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/certs/localhost.crt
+      remote_src: yes
+      mode: 0644
+
+  - name: Copy letsecrypt certificate
+    copy:
+      src: "/etc/letsencrypt/live/{{ frontend_hostname }}/privkey.pem"
+      dest: /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/private/localhost.key
+      remote_src: yes
+
+      mode: 0644
+  - name: Restart jbcs
+    ansible.builtin.command: /opt/jbcs-httpd24-2.4/httpd/sbin/apachectl start
+
+```
+
+Run this playbook with the following command e.g. ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "frontend_hostname=frontend1.xxx.sandboxxxx.opentlc.com"
+
+The hostname of the frontend server can be found in the email received from the RHPDS provisioning.  NOTE: Do not add the "https://" part, just the hostname
+
+`ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "frontend_hostname=<your frontend hostname>"`
+
+
 # Testing the JBCS installation
 
 To test the JBoss Core Services are installed correctly, use your browser and navigate to the external hostname of your JBoss Core Server.
 
 e.g. `https://frontend1.xxxxx.domainname.com`
 
-The url of the frontend server can be found in the email received from the RHPDS provisioning.
+
 
 You should see the default apache landing page.
 
