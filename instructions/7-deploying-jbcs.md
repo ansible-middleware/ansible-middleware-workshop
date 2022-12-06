@@ -89,7 +89,7 @@ Create a file called ssl.yml and past the following
       remote_src: yes
 
       mode: 0644
-  - name: Stop jbcs
+  - name: Start jbcs
     service:
       name: jbcs-httpd24-httpd.service
       state: started
