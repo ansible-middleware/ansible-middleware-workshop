@@ -45,7 +45,9 @@ Create a file called ssl.yml and past the following
   - name: Install on node RHEL 8
     block:
       - name: Stop jbcs
-        ansible.builtin.command: /opt/jbcs-httpd24-2.4/httpd/sbin/apachectl stop
+        service:
+          name: jbcs-httpd24-httpd.service
+          state: stopped
       - name: Enable EPEL
         dnf:
           name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm"
@@ -87,8 +89,10 @@ Create a file called ssl.yml and past the following
       remote_src: yes
 
       mode: 0644
-  - name: Restart jbcs
-    ansible.builtin.command: /opt/jbcs-httpd24-2.4/httpd/sbin/apachectl start
+  - name: Stop jbcs
+    service:
+      name: jbcs-httpd24-httpd.service
+      state: started
 
 ```
 
