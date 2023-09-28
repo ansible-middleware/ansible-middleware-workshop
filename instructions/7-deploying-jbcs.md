@@ -2,9 +2,6 @@
 
 Now that the application is deployed, we can access the application by connecting to each individual JBoss EAP instance.  But what we really is need is a load balancer to sit in front of these two nodes, providing a single IP address to access all instance of the application.  JBoss Core Services will provide this funationality for use using mod_cluster.
 
-To deploy JBoss Core Services, we've provided a zip file containing the role required to deploy jbcs.  To add this role the the project, run the following command:
-
-`unzip workshop/jbcs.zip -d roles`
 
 We'll create a playbook to use this role.  Create a file called jbcs.yml in the top level folder.  Copy the following snippet to the top of the file:
 
@@ -13,14 +10,14 @@ We'll create a playbook to use this role.  Create a file called jbcs.yml in the 
 - name: Playbook for JBCS Hosts
   hosts: jbcs
   become: true
+  vars:
+    jbcs_offline_install: false
+    omit_rhn_output: false
+    jbcs_zip_path: /home/devops/ansible-middleware-workshop
   collections:
-    - middleware_automation.redhat_csp_download
+    - redhat.jbcs
   roles:
-    - redhat_csp_download
-  tasks:
-    - name: "JBoss Core Services"
-      include_role:
-        name: jbcs
+    - jbcs
 ```
 
 Save this file, and test the playbook by running the following command:

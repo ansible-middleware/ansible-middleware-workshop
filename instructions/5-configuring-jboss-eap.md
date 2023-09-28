@@ -7,19 +7,17 @@ To configure JBoss EAP we're going to download and install postgresql jdbc drive
 ```
     - name: "Set up for JBoss module"
       include_role:
-        name: wildfly_driver
+        name: eap_driver
 ```
 
 To use these tasks we need to add the required ansible variables to identify and download the jdbc drivers.
 
 
 ```
-    jdbc_driver_module_dir: "{{ wildfly_home }}/modules/org/postgresql/main"
-    jdbc_driver_version: 9.4.1212
-    jdbc_driver_jar_filename: "postgresql-{{ jdbc_driver_version }}.jar"
-    jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
-    jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
-    jdbc_driver_module_name: 'org.postgresql'
+    eap_driver_module_name: 'org.postgresql'
+    eap_driver_version: 9.4.1212
+    eap_driver_jar_filename: "postgresql-{{ eap_driver_version }}.jar"
+    eap_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ eap_driver_version }}/{{ eap_driver_jar_filename }}"
 ```
 
 Add the above environment variables to the jboss.yml file to the end of the vars section, and rerun the playbook to deploy the JDBC driver.
@@ -84,11 +82,11 @@ To test the configuration we just performed with JCliff we'll first of all ssh i
 
 Once you're logged in, change user to the jboss user with the following command:
 
-`sudo su jboss`
+`sudo su eap`
 
 Then run the following commands to use the JBoss cli:
 
-`cd /opt/jboss-eap-7.4/bin`
+`cd /opt/jboss_eap/jboss-eap-7.4/bin`
 
 `./jboss-cli.sh --connect`
 
