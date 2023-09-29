@@ -2,37 +2,40 @@
 
 Now that the application is deployed, we can access the application by connecting to each individual JBoss EAP instance.  But what we really is need is a load balancer to sit in front of these two nodes, providing a single IP address to access all instance of the application.  JBoss Core Services will provide this funationality for use using mod_cluster.
 
-
-We'll create a playbook to use this role.  Create a file called jbcs.yml in the top level folder.  Copy the following snippet to the top of the file:
+create a file pre-reqs.yml
 
 ```
 ---
-- name: Playbook for JBCS Hosts
-  hosts: jbcs
-  become: true
-  vars:
-    jbcs_offline_install: false
-    omit_rhn_output: false
-    jbcs_zip_path: /home/devops/ansible-middleware-workshop
-  collections:
-    - redhat.jbcs
-  roles:
-    - jbcs
+- name: Playbook for installing prerequisites
+  hosts: all
+  tasks:
+    - name: "Install packages"
+      ansible.builtin.include_role:
+        name: fastpackages
+      vars:
+        packages_list:
+          - procps-ng
+          - mailcap
+          - unzip
+          - firewalld
+          - ca-certificates
+          - python3-lxml
+          - net-tools
+          - python3-policycoreutils
+          - policycoreutils-python-utils
+
 ```
 
-Save this file, and test the playbook by running the following command:
-
-`ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"`
+`ansible-playbook -i ./inventory/hosts pre-reqs.yml `
 
 # Install valid ssl cert
 
-Before we test our JBCS installation we need to install a valid SSL certificate.  To do this we'll use Let's Encrypt via certbot.
+Before we run our JBCS installation we need to install a valid SSL certificate.  To do this we'll use Let's Encrypt via certbot.
 
 Create a file called ssl.yml and past the following
 
 ```
 ---
-
 - name: Request Let's Encrypt Static Certificates
   hosts: jbcs
   become: true
@@ -43,7 +46,7 @@ Create a file called ssl.yml and past the following
     block:
       - name: Stop jbcs
         service:
-          name: jbcs-httpd24-httpd.service
+          name: jbcs.service
           state: stopped
       - name: Enable EPEL
         dnf:
@@ -75,29 +78,92 @@ Create a file called ssl.yml and past the following
   - name: Copy letsecrypt key
     copy:
       src: "/etc/letsencrypt/live/{{ frontend_hostname }}/cert.pem"
-      dest: /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/certs/localhost.crt
+      dest: /etc/pki/tls/certs/{{ frontend_hostname }}.crt
       remote_src: yes
       mode: 0644
 
   - name: Copy letsecrypt certificate
     copy:
       src: "/etc/letsencrypt/live/{{ frontend_hostname }}/privkey.pem"
-      dest: /opt/jbcs-httpd24-2.4/httpd/conf/openssl/pki/tls/private/localhost.key
+      dest: /etc/pki/tls/private/{{ frontend_hostname }}.key
       remote_src: yes
 
       mode: 0644
+
   - name: Start jbcs
     service:
-      name: jbcs-httpd24-httpd.service
+      name: jbcs.service
       state: started
+
 
 ```
 
-Run this playbook with the following command e.g. ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "frontend_hostname=frontend1.xxx.sandboxxxx.opentlc.com"
+Run this playbook with the following command e.g. ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "frontend_hostname=frontend-url"
 
 The hostname of the frontend server can be found in the email received from the RHPDS provisioning.  NOTE: Do not add the "https://" part, just the hostname
 
 `ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "frontend_hostname=<your frontend hostname>"`
+
+We'll create a playbook to use this role.  Create a file called jbcs.yml in the top level folder.  Copy the following snippet to the top of the file:
+
+```
+---
+- name: Playbook for loadbalancer Hosts
+  hosts: jbcs
+  become: true
+  vars:
+    jbcs_ssl_enable: true
+    jbcs_zip_path: /home/devops/ansible-middleware-workshop
+    jbcs_bind_address: 0.0.0.0
+    jbcs_offline_install: false
+    jbcs_mod_cluster_enable: true
+  collections:
+    - redhat.jbcs
+  roles:
+    - jbcs
+  pre_tasks:
+    - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+      ansible.posix.seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+    - name: Set nid_enabled flag on and keep it persistent across reboots
+      ansible.posix.seboolean:
+        name: nis_enabled
+        state: yes
+        persistent: yes
+    - name: Add reverse proxied port to selinux
+      ansible.builtin.command: semanage port -m -t http_port_t -p tcp 8080
+      changed_when: False
+    - name: Add reverse proxied port to selinux
+      ansible.builtin.command: semanage port -m -t http_port_t -p tcp 8009
+      changed_when: False
+  tasks:
+    - name: install firewalld
+      become: true
+      action: yum name=firewalld state=installed
+    - name: Start firewalld
+      become: true
+      service: name=firewalld state=started enabled=yes
+
+    - name: configure firewall for JBCS ports
+      become: yes
+      firewalld:
+        port: "{{ port }}"
+        permanent: true
+        state: enabled
+        immediate: yes
+      loop:
+        - "80/tcp"
+        - "6666/tcp"
+        - "443/tcp"  
+      loop_control:
+        loop_var: port
+```
+
+Save this file, and test the playbook by running the following command:
+
+`ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"` -e jbcs_external_domain_name=frontend-url
 
 
 # Testing the JBCS installation

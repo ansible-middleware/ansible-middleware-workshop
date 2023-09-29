@@ -55,7 +55,8 @@ collections:
     version: "==7.4.0"
   - name: community.postgresql
     version: "==3.2.0"
-  - name: redhat.redhat_csp_download
+  - name: redhat.jbcs
+    version: "==1.0.1"
 ```
 
 Save changes to this file, and run the following command to install the collections: 
