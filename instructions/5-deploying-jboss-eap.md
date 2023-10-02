@@ -21,18 +21,15 @@ Copy the contents of the following file into jboss.yml:
     - eap_systemd
 ```
 
-Have a look at the yaml we just copied, it's relatively straight forward.  First thing the file does is setup the environment variables required for the installation. 
-
-??
 
 Once JBoss is installed, the tasks perform the following actions:
 
 * Install and configure the firewall to allow access to the ports required by JBoss EAP. The firewall is opened an all ports for http traffic, management traffic, and ajp traffic (used by mod_cluster).
-* Run the widlfly_systemd role to configure the JBoss EAP instance as a systemd service.
+* Run the eap_systemd role to configure the JBoss EAP instance as a systemd service.
 
 ## Running the playbook
 
-Note that the Ansible collection for JBoss EAP will also take care of downloading the required assets from the Red Hat Customer Portal (the archive containing the Java app server files). However, one does need to provide the credentials associated with a service account. A Red Hat customer can manage service accounts using the hybrid cloud console. Within this portal, on the service accounts tab, you can create a new service account if one does not already exist.
+Note that the Ansible collection for JBoss EAP will also take care of downloading the required assets from the Red Hat Customer Portal (the archive containing the Java app server files). However, one does need to provide the credentials associated with a service account. A Red Hat customer can manage service accounts using the hybrid cloud console. Within this portal, on the [service accounts tab](https://console.redhat.com/application-services/service-accounts), you can create a new service account if one does not already exist.
 
 To run the playbook we'll run the following command, you will need your Red Hat network credentials that we created in section 1: 
 
@@ -50,12 +47,8 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-To test the install, click the "Browser Preview" tab and enter the url http://app1.xxxxx.internal:8080/ in the address bar (replace xxxxx with the guid of your workshop, you can find this from the previous ansible command).  You should see the following page:
-
-![Default JBoss landing page](../images/jboss-default.png)
-
-You should see a html response showing the default JBoss landing page.
+Run `curl http://app1.xxxxx.internal:8080/` in the terminal.  You should see a html response showing the default JBoss landing page.
 
 Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
 
-Next [Step 5](./5-configuring-jboss-eap.md)
+Next [Step 6](./6-configuring-jboss-eap.md)

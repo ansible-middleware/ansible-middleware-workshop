@@ -33,8 +33,16 @@ Add the following
 
 Create a file eap_configuration.yml.j2
 
+Copy the following snippet to the top of the file:
+
 ```
 wildfly-configuration:
+  socket-binding-group:
+    standard-sockets:
+      remote-destination-outbound-socket-binding:
+        proxy1:
+          host: {{ groups['jbcs'][0] }}
+          port: 6666
   subsystem:
     datasources:
       jdbc-driver:
@@ -63,13 +71,21 @@ wildfly-configuration:
           stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.novendor.NullStaleConnectionChecker
           valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
           transaction-isolation: TRANSACTION_READ_COMMITTED
+    modcluster:
+      proxy:
+        default:
+          advertise-socket: modcluster
+          proxies:
+            - proxy1
+          listener: ajp
 ```
+
+Save changes to jboss.yml and re-run the jboss playbook.
+
+`ansible-playbook -i ./inventory/hosts jboss.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>"`
 
 If you're familiar with JBoss EAP configuration using the cli, you'll recognise these configurations. 
 
-<!-- In this instance we're passing the correct management port to JCliff, then using JCliff to add a postresql driver and datasource.  We're also using the loop task to iterate over the management ports, in our case we only have one instance per node, so a single management port. -->
-
-Re-run the playbook to see the changes.
 
 ## Testing the JBoss EAP Configuration
 
@@ -113,6 +129,10 @@ To return to the bastion node, run the following command three times:
 
 This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
 
-Next [Step 6](./6-deploying-applications.md) will deploy the application.
+## Testing the JBCS integration
+
+We should be able to access the JBoss EAP landing pages from the frontend url.  From your browser navigate to the frontend url listed in your workshop email.
+
+Next [Step 7](./7-deploying-applications.md) will deploy the application.
 
 

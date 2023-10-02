@@ -7,10 +7,16 @@ The last step of the workshop is to tie everything together.  To do this, we'll 
 # Postgres playbook
 - import_playbook: postgresql.yml
 
+# Pre-reqs
+- import_playbook: pre-reqs.yml
+
+# SSL
+- import_playbook: ssl.yml
+
 # JBoss Core Services (Apache HTTPD)
 - import_playbook: jbcs.yml
 
-# Wildfly Playbook
+# JBoss EAP Playbook
 - import_playbook: jboss.yml
 
 ```
@@ -19,7 +25,7 @@ This playbook will run the postgresql, jbcs, and jboss playbooks in sequence.  T
 
 Save this file and run the playbook with the following command:
 
-`ansible-playbook -i ./inventory/hosts demo.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password>" `
+`ansible-playbook -i ./inventory/hosts demo.yml --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password> jbcs_external_domain_name=" `
 
 # Conclusion
 
@@ -27,4 +33,4 @@ You can download the completed workshop from here:  https://github.com/deewhyweb
 
 The workshop is now complete, we've demonstrated the use of the ansible-middleware collection to deploy JBoss EAP, a J2EE application, and JBoss Core Services as a load balancer.  Persistence is provided by a postresql database.
 
-Next [Step 10](./10-day-two.md)
+Next [Step 10](./10-conslusionmd)
