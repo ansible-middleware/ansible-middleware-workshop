@@ -37,12 +37,6 @@ Copy the following snippet to the top of the file:
 
 ```
 wildfly-configuration:
-  socket-binding-group:
-    standard-sockets:
-      remote-destination-outbound-socket-binding:
-        proxy1:
-          host: {{ groups['jbcs'][0] }}
-          port: 6666
   subsystem:
     datasources:
       jdbc-driver:
@@ -71,13 +65,7 @@ wildfly-configuration:
           stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.novendor.NullStaleConnectionChecker
           valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
           transaction-isolation: TRANSACTION_READ_COMMITTED
-    modcluster:
-      proxy:
-        default:
-          advertise-socket: modcluster
-          proxies:
-            - proxy1
-          listener: ajp
+
 ```
 
 Save changes to jboss.yml and re-run the jboss playbook.
@@ -127,6 +115,79 @@ To return to the bastion node, run the following command three times:
 `exit`
 
 This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
+
+## integrating with JBSC
+
+To be able to access our JBoss EAP clusters from the outside world we need to integrate with JBCS.  To do this we need to update the eap_configuration.yml.j2 file.
+
+Add the following to the bottom of the file:
+
+
+```
+    modcluster:
+      proxy:
+        default:
+          advertise-socket: modcluster
+          proxies:
+            - proxy1
+          listener: ajp
+  socket-binding-group:
+    standard-sockets:
+      remote-destination-outbound-socket-binding:
+        proxy1:
+          host: {{ groups['jbcs'][0] }}
+          port: 6666
+
+```
+The eap_configuration.yml.j2 file should now look like:
+
+```
+wildfly-configuration:
+  subsystem:
+    datasources:
+      jdbc-driver:
+        postgresql:
+          driver-name: postgresql
+          driver-xa-datasource-class-name: org.postgresql.xa.PGXADataSource
+          driver-module-name: org.postgresql
+          driver-class-name: org.postgresql.Driver
+      data-source:
+        PostgreSQLDS:
+          enabled: true
+          exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter
+          jndi-name: java:jboss/datasources/{{ postgres.jndi_ds }}
+          jta: true
+          max-pool-size: 20
+          min-pool-size: 0
+          connection-url: "jdbc:postgresql://{{ (groups['pgsql'][0] if groups['pgsql'] | length > 0 else 'localhost') }}:5432/{{ postgres.db_name }}"
+          driver-name: postgresql
+          user-name: "{{ postgres.user.name }}"
+          password: "{{ postgres.user.password }}"
+          validate-on-match: true
+          background-validation: false
+          background-validation-millis: 10000
+          flush-strategy: FailingConnectionOnly
+          statistics-enable: false
+          stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.novendor.NullStaleConnectionChecker
+          valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
+          transaction-isolation: TRANSACTION_READ_COMMITTED
+    modcluster:
+      proxy:
+        default:
+          advertise-socket: modcluster
+          proxies:
+            - proxy1
+          listener: ajp
+  socket-binding-group:
+    standard-sockets:
+      remote-destination-outbound-socket-binding:
+        proxy1:
+          host: {{ groups['jbcs'][0] }}
+          port: 6666
+```
+
+Re-run the playbook to configure the JBCS integration.
+
 
 ## Testing the JBCS integration
 
