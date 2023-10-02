@@ -116,9 +116,9 @@ To return to the bastion node, run the following command three times:
 
 This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
 
-## integrating with JBSC
+## Integrating with JBSC
 
-To be able to access our JBoss EAP clusters from the outside world we need to integrate with JBCS.  To do this we need to update the eap_configuration.yml.j2 file.
+To be able to access our JBoss EAP clusters from the outside world we need to integrate with JBCS.  To do this we need to update the eap_configuration.yml.j2 file to add mod_cluster configuration.
 
 Add the following to the bottom of the file:
 
