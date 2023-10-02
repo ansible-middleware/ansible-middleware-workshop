@@ -151,7 +151,7 @@ Save this file, and test the playbook by running the following command:
 
 `ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password> jbcs_external_domain_name=<your frontend hostname>"` 
 
-Replace xxxx with the 
+Replace your frontend hostname with the url of the frontend listed in the instructions email.
 
 
 # Testing the JBCS installation

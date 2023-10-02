@@ -22,11 +22,6 @@ Copy the contents of the following file into jboss.yml:
 ```
 
 
-Once JBoss is installed, the tasks perform the following actions:
-
-* Install and configure the firewall to allow access to the ports required by JBoss EAP. The firewall is opened an all ports for http traffic, management traffic, and ajp traffic (used by mod_cluster).
-* Run the eap_systemd role to configure the JBoss EAP instance as a systemd service.
-
 ## Running the playbook
 
 Note that the Ansible collection for JBoss EAP will also take care of downloading the required assets from the Red Hat Customer Portal (the archive containing the Java app server files). However, one does need to provide the credentials associated with a service account. A Red Hat customer can manage service accounts using the hybrid cloud console. Within this portal, on the [service accounts tab](https://console.redhat.com/application-services/service-accounts), you can create a new service account if one does not already exist.

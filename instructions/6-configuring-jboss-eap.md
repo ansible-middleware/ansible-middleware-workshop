@@ -117,8 +117,7 @@ The output should show the postgresql driver.  Something like
             "driver-module-name" => "org.postgresql",
             "module-slot" => "main",
             "driver-datasource-class-name" => "",
-            "driver-xa-datasource-class-name" => "org.postgresql.xa.PGXADataSour
-ce",
+            "driver-xa-datasource-class-name" => "org.postgresql.xa.PGXADataSource",
 ....
 
 ```
