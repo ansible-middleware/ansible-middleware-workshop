@@ -1,12 +1,11 @@
 # 2 - Adding the ansible collections.
 
 This workshop uses the following collections:
+esql datasource, and configure mod_cluster.  For the purpose of this workshop we will use the following version: 0.0.21.  
+* [redhat.eap](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/eap/): This collection is used to perform the installation and configuration of the JBoss EAP instance.  For the purpose of this workshop we will use the following version: 1.4.3. 
 
-* [middleware_automation.jcliff](https://ansible-middleware.github.io/ansible_collections_jcliff/latest/): This collection is used to perform configuration of the JBoss EAP instance.  In this workshop we will use jcliff to install postgresql drivers, postgresql datasource, and configure mod_cluster.  For the purpose of this workshop we will use the following version: 0.0.21.  
-* [middleware_automation.wildfly](https://ansible-middleware.github.io/wildfly/latest/): This collection is used to perform the installation and configuration of the JBoss EAP instance.  For the purpose of this workshop we will use the following version: 0.0.4. 
 
-
-* [middleware_automation.redhat_csp_download](https://ansible-middleware.github.io/redhat-csp-download/latest/): This collection is used to perform the installation and configuration of Jboss core services, which we will use for load balancing.  For the purpose of this workshop we will use the following version: 1.2.1. 
+* [redhat.jbcs](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/jbcs/): This collection is used to perform the installation and configuration of Jboss core services, which we will use for load balancing.  For the purpose of this workshop we will use the following version: 1.0.1. 
 
 
 * [community.postgresql](https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html): This collection is used to perform the installation and configuration of postgresql.  

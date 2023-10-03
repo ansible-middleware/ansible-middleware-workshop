@@ -47,7 +47,15 @@ PLAY RECAP *********************************************************************
 
 ## Testing the installation
 
-Run `curl http://app1.xxxxx.internal:8080/` in the terminal.  You should see a html response showing the default JBoss landing page.
+Run `curl http://app1.xxxxx.internal:8080/|grep "<h3>"` in the terminal.  You should see the following:
+
+```
+curl app1.xxxxx.internal:8080/ | grep "<h3>"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1531  100  1531    0     0   373k      0 --:--:-- --:--:-- --:--:--  498k
+      <h3>Your Red Hat JBoss Enterprise Application Platform is running.</h3>
+      ```
 
 Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
 

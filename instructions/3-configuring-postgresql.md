@@ -79,7 +79,7 @@ To use the postgresql role, we need to create a playbook.  We will create a play
 
 ## Run the postgresql playbook
 
-To test the postgresql playbook, we will run the following command:
+To use the postgresql playbook, we will run the following command:
 
 `ansible-playbook -i ./inventory/hosts postgresql.yml`
 

@@ -7,7 +7,8 @@ First thing we'll do is add a post_tasks section at the end of jboss.yml.
 ```
   post_tasks:
     - include_tasks: validate.yml
-      loop: "{{ instance_http_ports }}"
+      loop: 
+        - "8080"
 ```
 
 This task requires a file validate.yml, so let's create this file in the same level as jboss.yml. Paste the following into validate.yml:
