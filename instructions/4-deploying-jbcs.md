@@ -1,8 +1,8 @@
 # 4 - Deploying JBoss Core Services
 
-Before we install JBoss EAP and our application, we need to make sure we can connect to our instances via the frontend gateway.  Our JBoss servers are do not have a public IP or DNS so we'll need to install a load balancer to provide this service. JBoss Core Services will provide this functionality using mod_cluster.
+Before we install JBoss EAP and our application, we need to make sure we can connect to our instances via the frontend gateway.  Our JBoss servers are do not have a public IP or DNS so we'll need to install a load balancer to provide this service. JBoss Core Services (JBCS) will provide this functionality using Apache HTTP server.
 
-To install JBCS we need to install some pre-reqs. Create a file pre-reqs.yml
+To install JBCS we need to ensure the mailcap package is installed otherwise /etc/mime.types will not be found.  We're going to create a separate playbook called pre-reqs to do this. Create a file pre-reqs.yml
 
 ```
 ---
@@ -24,7 +24,7 @@ And run this with:
 
 # Install valid ssl cert
 
-Before we run our JBCS installation we need to install a valid SSL certificate.  To do this we'll use Let's Encrypt via certbot.
+We need to ensure ssl is enabled on our frontend gateway, so we're going to create an SSL cert before we install JBCS.  To do this we'll use Let's Encrypt via certbot.
 
 Create a file called ssl.yml and past the following:
 
@@ -83,11 +83,12 @@ Create a file called ssl.yml and past the following:
 
 ```
 
-Run this playbook with the following command e.g. ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "jbcs_external_domain_name=frontend-url"
+This playbook will install the certbot package and use this to create a certificate and key for the domain name of the frontend gateway.  When this playbook is run we need to provide the frontend domain name with the variable jbcs_external_domain_name.  This domain name can be found in the instructions email. NOTE: Do not add the "https://" part, just the hostname
 
-The hostname of the frontend server can be found in the email received from the RHPDS provisioning.  NOTE: Do not add the "https://" part, just the hostname
+Run this playbook with the following command e.g. ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "jbcs_external_domain_name=frontend-domain-name"
 
-`ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "jbcs_external_domain_name=<your frontend hostname>"`
+
+`ansible-playbook -i ./inventory/hosts ssl.yml  --extra-vars "jbcs_external_domain_name=<your frontend domain name>"`
 
 We'll now create a playbook to install JBCS.  Create a file called jbcs.yml in the top level folder.  Copy the following snippet to the top of the file:
 
@@ -145,14 +146,14 @@ We'll now create a playbook to install JBCS.  Create a file called jbcs.yml in t
       loop_control:
         loop_var: port
 ```
-Note that the Ansible collection for JBCS will also take care of downloading the required assets from the Red Hat Customer Portal (the archive containing the Java app server files). However, one does need to provide the credentials associated with a service account. A Red Hat customer can manage service accounts using the hybrid cloud console. Within this portal, on the [service accounts tab](https://console.redhat.com/application-services/service-accounts), you can create a new service account if one does not already exist.
+
+Note that the Ansible collection for JBCS will also take care of downloading the required assets from the Red Hat Customer Portal (the archive containing the Java app server files). However, one does need to provide the credentials associated with a service account. You can manage service accounts using the hybrid cloud console. Within this portal, on the [service accounts tab](https://console.redhat.com/application-services/service-accounts), you can create a new service account if one does not already exist.
 
 Save this file, and test the playbook by running the following command:
 
-`ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password> jbcs_external_domain_name=<your frontend hostname>"` 
+`ansible-playbook -i ./inventory/hosts jbcs.yml  --extra-vars "rhn_username=<your rhn login> rhn_password=<your rhn password> jbcs_external_domain_name=<your frontend domain>"` 
 
-Replace your frontend hostname with the url of the frontend listed in the instructions email.
-
+Replace your frontend domain with the url of the frontend listed in the instructions email.
 
 # Testing the JBCS installation
 

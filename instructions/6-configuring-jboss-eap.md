@@ -1,10 +1,15 @@
 # 5 - Configuring JBoss EAP
-The JBoss EAP instances will need to connect to a shared postgresql instance to persist data.  JBoss EAP will need to be configured with the Postgresql driver and datasource.
 
-To configure JBoss EAP we're going to download and install postgresql jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the widlfly_driver role.  We'll add these tasks to the jboss.yml by adding the following to the tasks section after the "Set up for JBoss instance" task:
+Now that JBoss EAP is installed, we now need to configure it for the following:
+
+* The JBoss EAP instances will need to connect to a shared postgresql instance to persist data.  JBoss EAP will need to be configured with the Postgresql driver and datasource. 
+* The JBoss EAP instances will need to use mod_cluster to register themselves with the Apache HTTPS server installed by JBCS.  This will enable the HTTP server to load balance connections to the JBoss EAP instances.
+
+To configure JBoss EAP to connect to the PostgreSQL database we're going to download and install PostgreSQL jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the eap_driver role.  We'll add these tasks to the jboss.yml by adding the following to the end of jboss.yml:
 
 
 ```
+  tasks:
     - name: "Set up for JBoss module"
       include_role:
         name: eap_driver
@@ -20,20 +25,20 @@ To use these tasks we need to add the required ansible variables to identify and
     eap_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ eap_driver_version }}/{{ eap_driver_jar_filename }}"
 ```
 
-Add the above environment variables to the jboss.yml file to the end of the vars section, and rerun the playbook to deploy the JDBC driver.
+Add the above variables to the jboss.yml file to the end of the vars section.
 
 
 ## Configuring with yaml
 
-Add the following
+We also need to create a postgresql datasource and configure the connection to the PostgreSQL database.  We're going to use yaml to do this.
+
+Add the following variables to the jboss.yml file.
 
     eap_enable_yml_config: True
     eap_yml_configs:
       - eap_configuration.yml.j2
 
-Create a file eap_configuration.yml.j2
-
-Copy the following snippet to the top of the file:
+Create a new file called eap_configuration.yml.j2 and copy the following snippet to this file:
 
 ```
 wildfly-configuration:
@@ -116,9 +121,9 @@ To return to the bastion node, run the following command three times:
 
 This confirms the postgresql driver is installed; now exit the JBoss cli, logout from the node and go back to the ansible directory.
 
-## Integrating with JBSC
+## Integrating with JBoss Core Services
 
-To be able to access our JBoss EAP clusters from the outside world we need to integrate with JBCS.  To do this we need to update the eap_configuration.yml.j2 file to add mod_cluster configuration.
+To be able to access our JBoss EAP clusters from the outside world we need to integrate with the HTTP server installed by JBCS.  To do this we need to update the eap_configuration.yml.j2 file to add mod_cluster configuration.
 
 Add the following to the bottom of the file:
 
@@ -139,6 +144,10 @@ Add the following to the bottom of the file:
           port: 6666
 
 ```
+
+ These configurations add an entry to the socket-binding-group called proxy1 which points to the HTTP server installed on the frontend server.  Mod_cluster is then configured to use this connection as the default proxy.
+
+
 The eap_configuration.yml.j2 file should now look like:
 
 ```
@@ -187,7 +196,6 @@ wildfly-configuration:
 ```
 
 Re-run the playbook to configure the JBCS integration.
-
 
 ## Testing the JBCS integration
 
