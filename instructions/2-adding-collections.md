@@ -83,12 +83,25 @@ Once this command has completed, you should see the following output:
 /home/devops/.ansible/collections/ansible_collections/
 ├── ansible
 │   └── posix
+├── ansible.posix-1.5.4.info
+│   └── GALAXY.yml
 ├── community
 │   ├── general
 │   └── postgresql
-└── redhat
-    ├── eap
-    └── runtimes_common
+├── community.general-7.4.0.info
+│   └── GALAXY.yml
+├── community.postgresql-3.2.0.info
+│   └── GALAXY.yml
+├── redhat
+│   ├── eap
+│   ├── jbcs
+│   └── runtimes_common
+├── redhat.eap-1.4.3.info
+│   └── GALAXY.yml
+├── redhat.jbcs-1.0.1.info
+│   └── GALAXY.yml
+└── redhat.runtimes_common-1.1.3.info
+    └── GALAXY.yml
 
 ```
 
