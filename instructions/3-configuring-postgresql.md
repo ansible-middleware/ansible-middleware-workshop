@@ -66,7 +66,7 @@ The postgresql role requires the fastpackes role to install the packages require
 
 To use the postgresql role, we need to create a playbook.  We will create a playbook called `postgresql.yml`.  This playbook will contain the tasks that are required to install the postgresql role.  The playbook will be as follows:
 
-```
+``` yaml
 ---
 - name: Playbook for Postgresql Setup
   hosts: pgsql
@@ -79,7 +79,7 @@ To use the postgresql role, we need to create a playbook.  We will create a play
 
 ## Run the postgresql playbook
 
-To test the postgresql playbook, we will run the following command:
+To use the postgresql playbook, we will run the following command:
 
 `ansible-playbook -i ./inventory/hosts postgresql.yml`
 
@@ -126,4 +126,4 @@ To return to the bastion host enter
 
 Our postgresql database is now installed and configured, we can now move on to the next step, installing JBoss EAP.
 
-Next [Step 4](./4-deploying-jboss-eap.md)
+Next [Step 4](./4-deploying-jbcs.md)
