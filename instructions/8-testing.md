@@ -4,7 +4,7 @@ To test our deployment we'll add a validate section to our jboss.yml.  This step
 
 First thing we'll do is add a post_tasks section at the end of jboss.yml.
 
-```
+``` yaml
   post_tasks:
     - include_tasks: validate.yml
       loop: 
@@ -13,7 +13,7 @@ First thing we'll do is add a post_tasks section at the end of jboss.yml.
 
 This task requires a file validate.yml, so let's create this file in the same level as jboss.yml. Paste the following into validate.yml:
 
-```
+``` yaml
 ---
 - assert:
     that:
@@ -35,7 +35,7 @@ This file will validate the JBoss EAP instance is available on the correct port 
 
 To check the addressbook application is running, we'll add the following to a file called app-check.yml.
 
-```
+``` yaml
 ---
 - assert:
     that:

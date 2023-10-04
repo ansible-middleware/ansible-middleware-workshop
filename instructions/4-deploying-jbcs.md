@@ -4,7 +4,7 @@ Before we install JBoss EAP and our application, we need to make sure we can con
 
 To install JBCS we need to ensure the mailcap package is installed otherwise /etc/mime.types will not be found.  We're going to create a separate playbook called pre-reqs to do this. Create a file pre-reqs.yml
 
-```
+``` yaml
 ---
 - name: Playbook for installing prerequisites
   hosts: jbcs
@@ -29,7 +29,7 @@ We need to ensure ssl is enabled on our frontend gateway, so we're going to crea
 Create a file called ssl.yml and past the following:
 
 
-```
+``` yaml
 ---
 - name: Request Let's Encrypt Static Certificates
   hosts: jbcs
@@ -92,7 +92,7 @@ Run this playbook with the following command e.g. ansible-playbook -i ./inventor
 
 We'll now create a playbook to install JBCS.  Create a file called jbcs.yml in the top level folder.  Copy the following snippet to the top of the file:
 
-```
+``` yaml
 ---
 - name: Playbook for loadbalancer Hosts
   hosts: jbcs

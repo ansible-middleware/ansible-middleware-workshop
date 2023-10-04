@@ -8,7 +8,7 @@ Now that JBoss EAP is installed, we now need to configure it for the following:
 To configure JBoss EAP to connect to the PostgreSQL database we're going to download and install PostgreSQL jdbc drivers.  The ansible-middleware collection provides a mechanism to do this, using the eap_driver role.  We'll add these tasks to the jboss.yml by adding the following to the end of jboss.yml:
 
 
-```
+``` yaml
   tasks:
     - name: "Set up for JBoss module"
       include_role:
@@ -18,7 +18,7 @@ To configure JBoss EAP to connect to the PostgreSQL database we're going to down
 To use these tasks we need to add the required ansible variables to identify and download the jdbc drivers.
 
 
-```
+``` yaml
     eap_driver_module_name: 'org.postgresql'
     eap_driver_version: 9.4.1212
     eap_driver_jar_filename: "postgresql-{{ eap_driver_version }}.jar"
@@ -34,13 +34,15 @@ We also need to create a postgresql datasource and configure the connection to t
 
 Add the following variables to the jboss.yml file.
 
+``` yaml
     eap_enable_yml_config: True
     eap_yml_configs:
       - eap_configuration.yml.j2
+```
 
 Create a new file called eap_configuration.yml.j2 and copy the following snippet to this file:
 
-```
+``` yaml
 wildfly-configuration:
   subsystem:
     datasources:
@@ -128,7 +130,7 @@ To be able to access our JBoss EAP clusters from the outside world we need to in
 Add the following to the bottom of the file:
 
 
-```
+``` yaml
     modcluster:
       proxy:
         default:
@@ -150,7 +152,7 @@ Add the following to the bottom of the file:
 
 The eap_configuration.yml.j2 file should now look like:
 
-```
+``` yaml
 wildfly-configuration:
   subsystem:
     datasources:

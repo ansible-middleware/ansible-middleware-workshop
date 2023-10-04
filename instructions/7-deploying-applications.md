@@ -4,7 +4,7 @@ Now that JBoss EAP is deployed and configured, we can deploy our application.  T
 
 First thing we'll do is add details of the app to the vars section of the jboss.yml file.  We'll need to provide the following details:
 
-```
+``` yaml
     app:
       name: 'addressbook.war'
       url: 'https://gpte-public.s3.amazonaws.com/addressbook.war'
@@ -12,7 +12,7 @@ First thing we'll do is add details of the app to the vars section of the jboss.
 
 Next we'll add the following to the tasks section of the jboss.yml file to download the application:
 
-```
+``` yaml
     - name: "Ensures webapp {{ app.name }} has been retrieved from {{ app.url }}"
       get_url:
         url: "{{ app.url }}"
@@ -21,7 +21,7 @@ Next we'll add the following to the tasks section of the jboss.yml file to downl
 
 Finally we'll add the following to the end of the tasks section of the jboss.yml file to deploy the application:
 
-```
+``` yaml
     - name: "Deploy webapp"
       include_role:
         name: eap_utils

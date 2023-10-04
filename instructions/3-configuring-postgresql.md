@@ -66,7 +66,7 @@ The postgresql role requires the fastpackes role to install the packages require
 
 To use the postgresql role, we need to create a playbook.  We will create a playbook called `postgresql.yml`.  This playbook will contain the tasks that are required to install the postgresql role.  The playbook will be as follows:
 
-```
+``` yaml
 ---
 - name: Playbook for Postgresql Setup
   hosts: pgsql

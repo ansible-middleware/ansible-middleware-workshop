@@ -2,7 +2,7 @@
 
 The last step of the workshop is to tie everything together.  To do this, we'll create a playbook called demo.yml, and paste the following into it:
 
-```
+``` yaml
 ---
 # Postgres playbook
 - import_playbook: postgresql.yml

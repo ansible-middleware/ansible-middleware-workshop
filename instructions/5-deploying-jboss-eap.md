@@ -4,7 +4,7 @@ Next thing we're going to do is deploy JBoss EAP.  To do this we'll create a jbo
 
 Copy the contents of the following file into jboss.yml:
 
-```
+``` yaml
 ---
 - name: "Deploy a JBoss EAP"
   hosts: jboss
