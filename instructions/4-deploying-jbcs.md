@@ -99,7 +99,7 @@ We'll now create a playbook to install JBCS.  Create a file called jbcs.yml in t
   become: true
   vars:
     jbcs_ssl_enable: true
-    jbcs_zip_path: /home/devops/ansible-middleware-workshop
+    jbcs_zip_path: /home/devops/workshop
     jbcs_bind_address: 0.0.0.0
     jbcs_offline_install: false
     jbcs_mod_cluster_enable: true
