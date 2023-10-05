@@ -31,17 +31,8 @@ Enter ssh password when prompted: xxxxxxxx
 
 ```
 
-To start the workshop, open the url of your bastion server in a browser. You will be prompted to login.  The default password is "changme".  Once you login to the IDE you will be able to clone the workshop repository.
+To start the workshop, open the url of your bastion server in a browser. You will be prompted to login.  The default password is "changme".  Once you login to the IDE you will be able to start the workshop.
 
-Open the git panel of the IDE and click on "Clone Repository" and enter the following url:
-
-https://github.com/ansible-middleware/ansible-middleware-workshop.git
-
-![VS Code git panel](../images/git.png)
-
-You will be prompted to select the folder to clone the repo to, choose the default folder, "/home/devops"
-
-You will then be prompted to open the folder in VS Code.
 
 ## Check ansible hosts
 
