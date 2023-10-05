@@ -1,5 +1,5 @@
 
-<h1 align="center"><a href="https://github.com/ansible-middleware/ansible-middleware-workshop/blob/main/instructions/1-environment-setup.md">Start here!</a></h1>
+<font size='8'>[Start here](instructions/1-environment-setup.md)</font>
 
 # Ansible-middleware workshop
 
@@ -24,11 +24,10 @@ You will need an Red Hat network account to be able to download the JBoss EAP in
 1. [Set up your environment](instructions/1-environment-setup.md)
 2. [Learn about adding collections](instructions/2-adding-collections.md)
 3. [Configure postgresql](instructions/3-configuring-postgresql.md)
-4. [Deploying JBoss EAP](instructions/4-deploying-jboss-eap.md)
-5. [Configuring JBoss EAP](instructions/5-configuring-jboss-eap.md)
-6. [Deploying applications](instructions/6-deploying-applications.md)
-7. [Deploying JBoss Core Services](instructions/7-deploying-jbcs.md)
+4. [Deploying JBoss Core Services](instructions/4-deploying-jbcs.md)
+5. [Deploying JBoss EAP](instructions/5-deploying-jboss-eap.md)
+6. [Configuring JBoss EAP](instructions/6-configuring-jboss-eap.md)
+7. [Deploying applications](instructions/7-deploying-applications.md)
 8. [Testing](instructions/8-testing.md)
 9. [Combining the playbooks](instructions/9-combining.md)
-10. [Day 2 operations](instructions/10-day-two.md)
 
