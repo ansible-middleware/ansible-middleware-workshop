@@ -55,7 +55,8 @@ curl app1.xxxxx.internal:8080/ | grep "<h3>"
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1531  100  1531    0     0   373k      0 --:--:-- --:--:-- --:--:--  498k
       <h3>Your Red Hat JBoss Enterprise Application Platform is running.</h3>
-      ```
+      
+```
 
 Now that JBoss EAP is installed, let's move on to the next section, configuring JBoss EAP.
 
