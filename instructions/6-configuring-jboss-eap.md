@@ -68,7 +68,6 @@ wildfly-configuration:
           background-validation: false
           background-validation-millis: 10000
           flush-strategy: FailingConnectionOnly
-          statistics-enable: false
           stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.novendor.NullStaleConnectionChecker
           valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
           transaction-isolation: TRANSACTION_READ_COMMITTED
@@ -178,7 +177,6 @@ wildfly-configuration:
           background-validation: false
           background-validation-millis: 10000
           flush-strategy: FailingConnectionOnly
-          statistics-enable: false
           stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.novendor.NullStaleConnectionChecker
           valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
           transaction-isolation: TRANSACTION_READ_COMMITTED
